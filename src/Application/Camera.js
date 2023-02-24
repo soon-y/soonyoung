@@ -56,9 +56,15 @@ export default class Camera {
     }
 }
 
-window.addEventListener("devicemotion", (e)=>{
-    let beta = e.rotationRate.beta
-    let gamma = e.rotationRate.gamma
-    group.position.x += (beta - group.position.x)
-    group.position.y += (gamma - group.position.y)
-}, true)
+window.addEventListener('deviceorientation', event => {
+    event.alpha // rotation along the z axis
+    let beta = event.beta // rotation along the x axis
+    let gamma = event.gamma // rotation along the y axis
+
+
+    console.log("beta : " + beta)
+    console.log("gamma:" + gamma)
+
+    group.position.x = gamma 
+    group.position.y = -beta
+}, true);
