@@ -27,7 +27,7 @@ export default class Resources extends EventEmitter {
             //progress
             (itemUrl, itemsLoaded, itemsTotal) => {
                 const progress = Math.floor(itemsLoaded / itemsTotal * 100)
-                label.innerHTML = `${progress} %`
+                label.innerHTML = `${progress}%`
             }
         )
         this.items = {}
