@@ -1,6 +1,7 @@
 import Application from "./Application";
 import * as THREE from 'three'
 import { param } from "./param"
+import gsap from 'gsap'
 
 let group = new THREE.Group()
 
@@ -63,9 +64,22 @@ let y = 0
 
 window.addEventListener('deviceorientation', event => {
     if (isTouchDevice()) {
-        let xTilt = Math.round(event.gamma)
+        let yTilt = Math.round(event.beta)*0.1
+        let xTilt = Math.round(event.gamma)*0.3
 
-            group.position.x = xTilt
+        gsap.to(
+            group.position,
+            {
+                y: -yTilt,
+                duration: 0.6, ease: 'power2.inout'
+            })
+
+        gsap.to(
+            group.position,
+            {
+                x: xTilt,
+                duration: 0.6, ease: 'power2.inout'
+            })
     }
 }, true);
 
