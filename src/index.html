@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="../html/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="../html/appIcon.jpg">
+    <title>Soonyoung Park</title>
+</head>
+
+<body>
+    <canvas class="webgl"></canvas>
+    <section class="section">
+    </section>
+    <section class="section">
+        <div class="center">
+            <ul>
+                <div class="threejs">
+                    <li>
+                        <a href="https://snake-game-soon-y.vercel.app/" target="_blank">
+                            snake game
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://a-billiard-simulation.vercel.app/" target="_blank">
+                            a billard simulation
+                        </a>
+                    </li>
+                </div>
+            </ul>
+            <div class="java">
+                <button id="robotApp">
+                    cleaning robot app
+                </button><br>
+                <button id="village">
+                    a village
+                </button>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+            </div>
+            <div class="design">
+                <button id="multiculture">
+                    multiculture museum
+                </button><br>
+            </div>
+        </div>
+    </section>
+    <section class="section">
+        <div class="center">
+            <form action="https://formspree.io/f/xknenaop" method="POST">
+                <input type="text" id="name" name="name" placeholder="Your name" required>
+                <input type="email" id="email" name="email" placeholder="email@address.com" required>
+                <textarea id="message" name="message" placeholder="Write something..." required></textarea>
+                <input type="submit" value="Submit">
+            </form>
+            <li>
+                <a href="https://www.linkedin.com/in/soonyoung-park/" target="_blank">
+                    or check my LinkedIn profile
+                </a>
+            </li>
+        </div>
+    </section>
+
+    <div id="robotAppModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h1>cleaning robot App</h1>
+            <h3>#2022 &nbsp;&nbsp; #Java &nbsp;&nbsp; #vertical prototype <br>
+                <a href="https://github.com/soon-y/robotAutoMode">&lt;/autoMode&gt;</a> <br>
+                <a href="https://github.com/soon-y/robotScheduleCleaning">&lt;/scheduleCleaning&gt;</a>
+            </h3>
+            <p></p>
+        </div>
+
+    </div>
+
+    <div id="villageModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h1>a village</h1>
+            <h3>#2021 &nbsp;&nbsp; #Java &nbsp;&nbsp; <a href="https://github.com/soon-y/village"> &lt;/code&gt;</a>
+            </h3>
+            <h2>UML Diagram</h2>
+            <img src="../images/village/uml.jpg" alt="uml diagram">
+            <h2>Video Demo</h2>
+            <video controls>
+                <source src="../images/village/video.mp4" type="video/mp4">
+                Your browser does not support HTML video.
+            </video>
+        </div>
+
+    </div>
+
+    <div id="multicultureModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h1>multiculture museum</h1>
+            <h3>#2014 &nbsp;&nbsp; #Brainding &nbsp;&nbsp; </h3>
+
+            <img src="../images/multiculture/m-logo.png" alt="uml diagram">
+            <h2>logo ideas</h2>
+            <div id="idea">
+                <div class="img-box hex">
+                    <img src="../images/multiculture/hex.jpg">
+                    <H1>Connection</H1>
+                </div>
+                <div class="img-box globe">
+                    <img src="../images/multiculture/globe.jpg">
+                    <H1>Globe</H1>
+                </div>
+                <div class="img-box support">
+                    <img src="../images/multiculture/support.jpg">
+                    <H1>Support</H1>
+                </div>
+                <div class="img-box network">
+                    <img src="../images/multiculture/network.jpg">
+                    <H1>Network</H1>
+                </div>
+            </div>
+            <img src="../images/multiculture/color.png" alt="uml diagram">
+            <img src="../images/multiculture/font.png" alt="uml diagram">
+            <div id="dynamicLogoWrapper">
+                <img id="dynamicLogo" src="../images/multiculture/dynamic-logo.gif" alt="uml diagram">
+            </div>
+            <img id="pattern" src="../images/multiculture/pattern.gif" alt="uml diagram">
+            <img src="../images/multiculture/stationery.png" alt="uml diagram">
+            <img src="../images/multiculture/bag.png" alt="uml diagram">
+
+
+        </div>
+
+    </div>
+
+    <div class="overlay">
+        <div class="label">0%</div>
+    </div>
+    <script type="module" src="./script.js"></script>
+
+</body>
+
+</html>

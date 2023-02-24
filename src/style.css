@@ -1,0 +1,320 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.webgl {
+    position: fixed;
+    top: 0;
+    left: 0;
+    outline: none;
+}
+
+.section {
+    display: flex;
+    align-items: center;
+    min-height: 100vh;
+    position: relative;
+    color: #fff;
+}
+
+.center {
+    margin: auto;
+    text-align: center;
+}
+
+li {
+    list-style-type: none;
+}
+
+button,
+a {
+    background-color: transparent;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    -webkit-transition: .4s;
+    transition: .4s;
+    padding: 0 1rem;
+    font-size: 3vmin;
+    line-height: 200%;
+    cursor: pointer;
+    border: none;
+    font-family: 'Lucida Console', monospace;
+}
+
+button:hover,
+a:hover {
+    color: #33ff00;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.overlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000000;
+    opacity: 1;
+    transition: opacity ease-in-out 2s;
+}
+
+.overlay .label{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    text-align: center;
+    font-size: 50px;
+    color: #33ff00;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* --------------------------------
+contact 
+-------------------------------- */
+
+form {
+    width: 600px;
+}
+
+::-webkit-input-placeholder {
+    /* Edge */
+    color: rgba(255, 255, 255, 0.8);
+}
+
+:-ms-input-placeholder {
+    /* Internet Explorer */
+    color: rgba(255, 255, 255, 0.8);
+}
+
+::placeholder {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+input,
+textarea {
+    width: 100%;
+    padding: 2vmin;
+    border-radius: 6vmin;
+    box-sizing: border-box;
+    margin-top: 1vmin;
+    margin-bottom: 1vmin;
+    resize: vertical;
+    font-family: 'Roboto', sans-serif;
+    font-size: 2.4vmin;
+    background-color: rgba(255, 255, 255, 0.5);
+    border: none;
+}
+
+input:focus,
+textarea:focus {
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+input:valid,
+textarea:valid {
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+input[type=submit] {
+    background-color: rgba(161, 85, 255, 0.3);
+    color: #a155ff;
+    cursor: pointer;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input[type=submit]:hover {
+    background-color: rgba(161, 85, 255, 1);
+    color: #fff;
+}
+
+#message {
+    height: 20vh;
+}
+
+/* The Modal (background) */
+.modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    font-family: 'Roboto', sans-serif;
+    background-color: rgba(0, 0, 0, 0.6);
+    width: 90%;
+    margin: auto;
+    color: #fff;
+    text-align: center;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.modal-content h1 {
+    font-family: 'Lucida Console', monospace;
+    color: #33ff00;
+    margin-bottom: 1vmin;
+}
+
+.modal h2{
+    margin-bottom: 1vmin;
+    margin-top: 3vmin;
+}
+
+
+.modal-content h3{
+    margin-bottom: 5vmin;
+}
+
+.modal-content a {
+    font-size: large;
+}
+
+.modal video{
+    max-width: 100%;
+}
+
+.modal-content img {
+    max-width: 100%;
+    margin-bottom: 1vmin;
+    max-height: 80%;
+ }
+ 
+ .modal-content p {
+     max-width: 600px;
+     margin: auto;
+     line-height: 160%;
+  }
+ 
+
+/* The Close Button */
+.close {
+    color: #ffffff;
+    float: right;
+    font-size: 3vmin;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #33ff00;
+    text-decoration: none;
+    cursor: pointer;
+    -webkit-transition: .3s;
+    transition: .3s;
+}
+
+/* multieculture */
+#idea{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 50% 50%;
+    margin: auto;
+    margin-bottom: 1vmin;
+    height: 80%;
+}
+
+#idea img-box{
+    height: 100%;
+    width: 100%;
+    margin: auto;
+    overflow: hidden;
+}
+
+#idea img{
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    min-height: 50vh;
+    object-fit: cover;
+    object-position: center;
+    margin: 0;
+}
+
+#idea img:hover{
+    filter: grayscale(80%) contrast(60%);
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+#idea img:hover ~ h1{
+    opacity: 1;
+    filter: blur(0px);
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+#idea .hex{
+    grid-column: 1; grid-row: 1;
+    position: relative;
+}
+#idea .globe{
+    grid-column: 2; grid-row: 1;
+    position: relative;
+}
+#idea .support{
+    grid-column: 1; grid-row: 2;
+    position: relative;
+}
+#idea .network{
+    grid-column: 2; grid-row: 2;
+    position: relative;
+}
+#idea h1{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: roboto;
+    font-size: 4vmin;
+    color: #fff;
+    filter: blur(6px);
+    opacity: 0;
+    text-shadow: 0 0 30px #000;
+}
+#dynamicLogoWrapper{
+    height: 80vh;
+    background: #fbfbfb;
+    align-items: center;  
+    margin-bottom: 1vmin;
+    position: relative;
+}
+#dynamicLogo{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#pattern{
+    width: 100%;
+}
+
+@media (max-width: 600px) {
+    form {
+        width: 90vw;
+    }
+
+    .modal-content {
+        width: 90%;
+    }
+}
+
