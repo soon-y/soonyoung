@@ -2,6 +2,8 @@ import Application from "./Application";
 import * as THREE from 'three'
 import { param } from "./param"
 
+let group = new THREE.Group()
+
 export default class Camera {
     constructor() {
         this.application = new Application()
@@ -10,7 +12,6 @@ export default class Camera {
         this.scene = this.application.scene
         this.canvas = this.application.canvas
         this.mouse = this.application.mouse
-        this.group = new THREE.Group()
 
         this.setInstance()
     }
@@ -31,8 +32,8 @@ export default class Camera {
             this.instance.position.z = param.diameter * 10
         }
 
-        this.group.add(this.instance)
-        this.scene.add(this.group)
+        group.add(this.instance)
+        this.scene.add(group)
     }
 
     resize() {
@@ -43,14 +44,21 @@ export default class Camera {
     update() {
         this.parallaxX = this.mouse.cursor.x * 10
         this.parallaxY = this.mouse.cursor.y * 10
-        this.group.position.x += (this.parallaxX - this.group.position.x) * 0.1
-        this.group.position.y += (this.parallaxY - this.group.position.y) * 0.1
+        group.position.x += (this.parallaxX - group.position.x) * 0.1
+        group.position.y += (this.parallaxY - group.position.y) * 0.1
         this.rotationX = this.mouse.cursor.x * 0.1
         this.rotationY = this.mouse.cursor.y * 0.1
-        this.group.rotation.y = this.rotationX
+        group.rotation.y = this.rotationX
     }
 
     scroll() {
         this.instance.position.y = - this.mouse.scrollY / this.size.height * param.objectsDistance
-    } ß
+    }
 }
+
+window.addEventListener("devicemotion", (e)=>{
+    let beta = e.rotationRate.beta
+    let gamma = e.rotationRate.gamma
+    group.position.x += (beta - group.position.x)
+    group.position.y += (gamma - group.position.y)
+}, true)
