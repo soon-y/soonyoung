@@ -20,7 +20,7 @@ export default class Particle {
         const count = 5000
         const positions = new Float32Array(count * 3)
         for (let i = 0; i < count * 3; i++) {
-            positions[i] = (Math.random() - 0.5) * param.diameter * 50
+            positions[i] = (Math.random() - 0.5) * param.diameter * 60
         }
         this.geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3))
     }

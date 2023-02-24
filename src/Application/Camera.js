@@ -16,13 +16,21 @@ export default class Camera {
     }
 
     setInstance() {
+        this.aspect = this.size.width / this.size.height
         this.instance = new THREE.PerspectiveCamera(
             60,
-            this.size.width / this.size.height,
+            this.aspect,
             0.1,
             5000
         )
-        this.instance.position.z = param.diameter * 10
+
+        this.val = 1 - this.aspect
+        if (this.aspect < 1) {
+            this.instance.position.z = param.diameter * 10 + 210 * this.val
+        } else {
+            this.instance.position.z = param.diameter * 10
+        }
+
         this.group.add(this.instance)
         this.scene.add(this.group)
     }
