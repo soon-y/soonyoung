@@ -42,13 +42,15 @@ export default class Camera {
     }
 
     update() {
-        this.parallaxX = this.mouse.cursor.x * 10
-        this.parallaxY = this.mouse.cursor.y * 10
-        group.position.x += (this.parallaxX - group.position.x) * 0.1
-        group.position.y += (this.parallaxY - group.position.y) * 0.1
-        this.rotationX = this.mouse.cursor.x * 0.1
-        this.rotationY = this.mouse.cursor.y * 0.1
-        group.rotation.y = this.rotationX
+        if (!isTouchDevice()) {
+            this.parallaxX = this.mouse.cursor.x * 10
+            this.parallaxY = this.mouse.cursor.y * 10
+            group.position.x += (this.parallaxX - group.position.x) * 0.1
+            group.position.y += (this.parallaxY - group.position.y) * 0.1
+            this.rotationX = this.mouse.cursor.x * 0.1
+            this.rotationY = this.mouse.cursor.y * 0.1
+            group.rotation.y = this.rotationX
+        }
     }
 
     scroll() {
@@ -60,10 +62,16 @@ let x = 0
 let y = 0
 
 window.addEventListener('deviceorientation', event => {
-    let xTilt = Math.round(event.gamma)
-    
+    if (isTouchDevice()) {
+        let xTilt = Math.round(event.gamma)
 
-    group.position.x = xTilt 
+            group.position.x = xTilt
+    }
 }, true);
 
+function isTouchDevice() {
+    return ('ontouchstart' in window) ||
+        (navigator.maxTouchPoints > 0) ||
+        (navigator.msMaxTouchPoints > 0);
+}
 
