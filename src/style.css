@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap');
 
 * {
     margin: 0;
@@ -39,10 +40,10 @@ a {
     transition: .4s;
     padding: 0 1rem;
     font-size: 3vmin;
-    line-height: 200%;
+    line-height: 220%;
     cursor: pointer;
     border: none;
-    font-family: 'Lucida Console', monospace;
+    font-family: 'Courier Prime', monospace;
 }
 
 button:hover,
@@ -51,7 +52,7 @@ a:hover {
     background-color: rgba(0, 0, 0, 0.8);
 }
 
-.overlay{
+.overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -62,7 +63,7 @@ a:hover {
     transition: opacity ease-in-out 2s;
 }
 
-.overlay .label{
+.overlay .label {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -84,16 +85,16 @@ form {
 
 ::-webkit-input-placeholder {
     /* Edge */
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(255, 255, 255, 1);
 }
 
 :-ms-input-placeholder {
     /* Internet Explorer */
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(255, 255, 255, 1);
 }
 
 ::placeholder {
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(255, 255, 255, 1);
 }
 
 input,
@@ -107,7 +108,7 @@ textarea {
     resize: vertical;
     font-family: 'Roboto', sans-serif;
     font-size: 2.4vmin;
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.6);
     border: none;
 }
 
@@ -122,8 +123,12 @@ textarea:valid {
 }
 
 input[type=submit] {
-    background-color: rgba(161, 85, 255, 0.3);
-    color: #a155ff;
+    font-size: 3vmin;
+    margin-top: 30px;
+    font-family: 'Courier Prime', monospace;
+    background-color: rgba(204, 163, 255, 0.8);
+    text-transform: uppercase;
+    color: #000;
     cursor: pointer;
     -webkit-transition: .4s;
     transition: .4s;
@@ -169,18 +174,18 @@ input[type=submit]:hover {
 }
 
 .modal-content h1 {
-    font-family: 'Lucida Console', monospace;
+    font-family: 'Courier Prime', monospace;
     color: #33ff00;
     margin-bottom: 1vmin;
 }
 
-.modal h2{
+.modal h2 {
     margin-bottom: 1vmin;
     margin-top: 3vmin;
 }
 
 
-.modal-content h3{
+.modal-content h3 {
     margin-bottom: 5vmin;
 }
 
@@ -188,7 +193,7 @@ input[type=submit]:hover {
     font-size: large;
 }
 
-.modal video{
+.modal video {
     max-width: 100%;
 }
 
@@ -196,14 +201,14 @@ input[type=submit]:hover {
     max-width: 100%;
     margin-bottom: 1vmin;
     max-height: 80%;
- }
- 
- .modal-content p {
-     max-width: 600px;
-     margin: auto;
-     line-height: 160%;
-  }
- 
+}
+
+.modal-content p {
+    max-width: 600px;
+    margin: auto;
+    line-height: 160%;
+}
+
 
 /* The Close Button */
 .close {
@@ -223,7 +228,7 @@ input[type=submit]:hover {
 }
 
 /* multieculture */
-#idea{
+#idea {
     display: grid;
     grid-template-columns: 50% 50%;
     grid-template-rows: 50% 50%;
@@ -232,14 +237,14 @@ input[type=submit]:hover {
     height: 80%;
 }
 
-#idea img-box{
+#idea img-box {
     height: 100%;
     width: 100%;
     margin: auto;
     overflow: hidden;
 }
 
-#idea img{
+#idea img {
     width: 100%;
     height: 100%;
     max-width: none;
@@ -249,36 +254,44 @@ input[type=submit]:hover {
     margin: 0;
 }
 
-#idea img:hover{
+#idea img:hover {
     filter: grayscale(80%) contrast(60%);
     -webkit-transition: .4s;
     transition: .4s;
 }
 
-#idea img:hover ~ h1{
+#idea img:hover~h1 {
     opacity: 1;
     filter: blur(0px);
     -webkit-transition: .4s;
     transition: .4s;
 }
 
-#idea .hex{
-    grid-column: 1; grid-row: 1;
+#idea .hex {
+    grid-column: 1;
+    grid-row: 1;
     position: relative;
 }
-#idea .globe{
-    grid-column: 2; grid-row: 1;
+
+#idea .globe {
+    grid-column: 2;
+    grid-row: 1;
     position: relative;
 }
-#idea .support{
-    grid-column: 1; grid-row: 2;
+
+#idea .support {
+    grid-column: 1;
+    grid-row: 2;
     position: relative;
 }
-#idea .network{
-    grid-column: 2; grid-row: 2;
+
+#idea .network {
+    grid-column: 2;
+    grid-row: 2;
     position: relative;
 }
-#idea h1{
+
+#idea h1 {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -290,21 +303,23 @@ input[type=submit]:hover {
     opacity: 0;
     text-shadow: 0 0 30px #000;
 }
-#dynamicLogoWrapper{
+
+#dynamicLogoWrapper {
     height: 80vh;
     background: #fbfbfb;
-    align-items: center;  
+    align-items: center;
     margin-bottom: 1vmin;
     position: relative;
 }
-#dynamicLogo{
+
+#dynamicLogo {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
 
-#pattern{
+#pattern {
     width: 100%;
 }
 
@@ -316,5 +331,10 @@ input[type=submit]:hover {
     .modal-content {
         width: 90%;
     }
-}
 
+    button,
+    a {
+        font-size: 4vmin;
+        line-height: 220%;
+    }
+}
