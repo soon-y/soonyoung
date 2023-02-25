@@ -11,6 +11,7 @@ export default class World {
         this.resources = this.application.resources
         this.raycaster = this.application.raycaster
         this.mouse = this.application.mouse.cursor
+        this.currentIntersect = null
 
         // Wait for resources
         this.resources.on('ready', () => {
@@ -27,31 +28,35 @@ export default class World {
         if (this.particle) this.particle.update()
         if (this.project) this.project.update()
         if (this.contact) this.contact.update()
+
     }
 
-    transfrom() {
-        if (this.logo) {
-            let object = [this.logo.instance]
-            let intersects = this.raycaster.instance.intersectObjects(object)
+    intersect() {
+        if (this.logo && this.project) {
+            let objects = [this.project.project.mesh, this.project.threejs.mesh, this.project.java.mesh, this.project.design.mesh, this.logo.instance]
+            let intersects = this.raycaster.instance.intersectObjects(objects)
+
             if (intersects.length) {
-                this.logo.transfrom()
+                this.currentIntersect = intersects[0]
+                document.body.style.cursor = "pointer"
+                if (this.currentIntersect.object.parent.parent == this.logo.instance) {
+                    this.logo.transfrom()
+                }
+            } else {
+                this.currentIntersect = null
+                document.body.style.cursor = "default"
             }
         }
     }
 
-    intersect() {
-        this.currentIntersect = null
+    mousedown(){
+        if (this.logo && this.project) {
+            let objects = [this.project.project.mesh, this.project.threejs.mesh, this.project.java.mesh, this.project.design.mesh, this.logo.instance]
+            let intersects = this.raycaster.instance.intersectObjects(objects)
 
-        if (this.project && this.contact) {
-            let object = [this.project.project.mesh, this.project.threejs.mesh, this.project.java.mesh, this.project.design.mesh, this.contact.contact.mesh]
-            let intersects = this.raycaster.instance.intersectObjects(object)
             if (intersects.length) {
                 this.currentIntersect = intersects[0]
-                document.body.style.cursor = "pointer";
-            }
-            else {
-                this.currentIntersect = null
-                document.body.style.cursor = "default";
+                this.click()                
             }
         }
     }
@@ -77,6 +82,9 @@ export default class World {
                 document.querySelector(".threejs").style.display = "none"
                 document.querySelector(".java").style.display = "none"
                 document.querySelector(".design").style.display = "block"
+            }
+            else if (this.currentIntersect.object.parent.parent == this.logo.instance) {
+                this.logo.transfrom()
             }
         }
     }

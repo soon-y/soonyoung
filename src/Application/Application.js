@@ -44,7 +44,6 @@ export default class Application {
 
         this.mouse.on('mousemove', () => {
             this.raycaster.update()
-            this.world.transfrom()
             this.world.intersect()
         })
 
@@ -54,7 +53,9 @@ export default class Application {
 
         this.mouse.on('click', () => {
             this.world.click()
-            this.world.transfrom()
+            if (this.isTouchDevice) {
+                this.world.mousedown()
+            }
         })
     }
 
@@ -67,6 +68,12 @@ export default class Application {
         this.camera.update()
         this.renderder.update()
         this.world.update()
+    }
+
+    isTouchDevice() {
+        return ('ontouchstart' in window) ||
+            (navigator.maxTouchPoints > 0) ||
+            (navigator.msMaxTouchPoints > 0);
     }
 
 }
