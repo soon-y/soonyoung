@@ -51,9 +51,9 @@ export default class World {
                 if (this.currentIntersect.object.parent.parent == this.logo.instance) {
                     this.logo.transfrom()
                     if (this.logo.done) {
-                        console.log(checkbox.checked)
+                        checkbox.checked = false
                     } else {
-                        console.log(checkbox.checked)
+                        checkbox.checked = true
                     }
                 }
             } else {
@@ -99,10 +99,10 @@ export default class World {
             }
             else if (this.currentIntersect.object.parent.parent == this.logo.instance) {
                 this.logo.transfrom()
-                if (this.logo.done) {
-                    console.log(checkbox.checked)
+                if (checkbox.checked == true) {
+                    checkbox.checked = false
                 } else {
-                    console.log(checkbox.checked)
+                    checkbox.checked = true
                 }
             }
         }
