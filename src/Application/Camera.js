@@ -17,16 +17,18 @@ export default class Camera {
 
         this.setInstance()
 
-        if (typeof DeviceMotionEvent.requestPermission === 'function') {
-            permission.style.display = 'block'
-            permission.addEventListener("click", () => {
-                permission.style.display = 'none'
-                this.requestOrientationPermission()
-            })
-        } else {
-            window.addEventListener('deviceorientation', event => {
-                this.parallax(event)
-            }, true)
+        if (this.isTouchDevice) {
+            if (typeof DeviceMotionEvent.requestPermission === 'function') {
+                permission.style.display = 'block'
+                permission.addEventListener("click", () => {
+                    permission.style.display = 'none'
+                    this.requestOrientationPermission()
+                })
+            } else {
+                window.addEventListener('deviceorientation', event => {
+                    this.parallax(event)
+                }, true)
+            }
         }
     }
 
