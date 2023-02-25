@@ -579,8 +579,5 @@ export default class TypoHello {
             this.descEN.visible = false
             this.descKO.visible = true
         }
-
     }
-
-
 }
