@@ -59,13 +59,10 @@ export default class Camera {
     }
 }
 
-let x = 0
-let y = 0
-
-window.addEventListener('deviceorientation', event => {
+window.addEventListener('devicemotion', event => {
     if (isTouchDevice()) {
-        let yTilt = Math.round(event.beta)*0.1
-        let xTilt = Math.round(event.gamma)*0.3
+        let yTilt = Math.round(event.rotationRate.beta) * 0.3
+        let xTilt = Math.round(event.rotationRate.gamma) * 0.3
 
         gsap.to(
             group.position,
@@ -81,11 +78,32 @@ window.addEventListener('deviceorientation', event => {
                 duration: 0.6, ease: 'power2.inout'
             })
     }
-}, true);
+}, true)
+
+window.addEventListener('deviceorientation', event => {
+    if (isTouchDevice()) {
+        let yTilt = Math.round(event.beta) * 0.3
+        let xTilt = Math.round(event.gamma) * 0.3
+
+        gsap.to(
+            group.position,
+            {
+                y: -yTilt,
+                duration: 0.6, ease: 'power2.inout'
+            })
+
+        gsap.to(
+            group.position,
+            {
+                x: xTilt,
+                duration: 0.6, ease: 'power2.inout'
+            })
+    }
+}, true)
+
 
 function isTouchDevice() {
     return ('ontouchstart' in window) ||
         (navigator.maxTouchPoints > 0) ||
         (navigator.msMaxTouchPoints > 0);
 }
-
