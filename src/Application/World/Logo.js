@@ -9,8 +9,6 @@ import SmallBox from './mesh/SmallBox'
 import { param } from '../param.js'
 import gsap from 'gsap'
 
-let done = 0
-
 const posCenter = - param.outerRadius - param.space / 2
 const posG = param.outerRadius * 2 + param.space
 const posU = - param.outerRadius * 2 - param.space;
@@ -35,6 +33,7 @@ export default class Logo {
         this.instance.position.y = param.innerRadius
         this.instance.add(this.logoMove, this.logoKO, this.logoEN)
         this.scene.add(this.instance)
+        this.done = 0
 
         this.topArc = new HalfArc().mesh
         this.topArcMove = new HalfArc().mesh
@@ -475,7 +474,7 @@ export default class Logo {
         this.typo.update()
 
         if (this.logoMove.position.x == 0) {
-            done = 0
+            this.done = 0
         }
 
         if (this.logoMove.position.x <= posU) {
@@ -542,10 +541,10 @@ export default class Logo {
         }
 
         if (this.logoMove.position.x == posS) {
-            done = 1
+            this.done = 1
         }
 
-        if (done) {
+        if (this.done) {
             if (this.logoMove.position.x >= posU) {
                 this.toKO()
             }
@@ -561,7 +560,7 @@ export default class Logo {
     }
 
     transfrom() {
-        if (!done) {
+        if (!this.done) {
             gsap.to
                 (
                     this.logoMove.position,

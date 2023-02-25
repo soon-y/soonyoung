@@ -4,6 +4,8 @@ import Particle from './Particle'
 import TypoContact from './TypoContact'
 import TypoProject from './TypoProject'
 
+const checkbox = document.getElementById('checkbox')
+
 export default class World {
     constructor() {
         this.application = new Application()
@@ -20,6 +22,13 @@ export default class World {
             this.particle = new Particle()
             this.project = new TypoProject()
             this.contact = new TypoContact()
+        })
+        checkbox.addEventListener('click', () => {
+            if (checkbox.checked == true) {
+                this.logo.transfrom()
+            } else {
+                this.logo.transfrom()
+            }
         })
     }
 
@@ -41,6 +50,11 @@ export default class World {
                 document.body.style.cursor = "pointer"
                 if (this.currentIntersect.object.parent.parent == this.logo.instance) {
                     this.logo.transfrom()
+                    if (this.logo.done) {
+                        console.log(checkbox.checked)
+                    } else {
+                        console.log(checkbox.checked)
+                    }
                 }
             } else {
                 this.currentIntersect = null
@@ -49,14 +63,14 @@ export default class World {
         }
     }
 
-    touch(){
+    touch() {
         if (this.logo && this.project) {
             let objects = [this.project.project.mesh, this.project.threejs.mesh, this.project.java.mesh, this.project.design.mesh, this.logo.instance]
             let intersects = this.raycaster.instance.intersectObjects(objects)
 
             if (intersects.length) {
                 this.currentIntersect = intersects[0]
-                this.click()                
+                this.click()
             }
         }
     }
@@ -85,6 +99,11 @@ export default class World {
             }
             else if (this.currentIntersect.object.parent.parent == this.logo.instance) {
                 this.logo.transfrom()
+                if (this.logo.done) {
+                    console.log(checkbox.checked)
+                } else {
+                    console.log(checkbox.checked)
+                }
             }
         }
     }
