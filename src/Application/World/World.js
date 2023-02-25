@@ -24,10 +24,15 @@ export default class World {
             this.contact = new TypoContact()
         })
         checkbox.addEventListener('click', () => {
-            if (checkbox.checked == true) {
+            if (checkbox.checked) {
                 this.logo.transfrom()
             } else {
                 this.logo.transfrom()
+            }
+            if (this.logo.done) {
+                checkbox.checked = false
+            } else {
+                checkbox.checked = true
             }
         })
     }
