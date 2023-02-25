@@ -3,7 +3,6 @@ import { TTFLoader } from 'three/examples/jsm/loaders/TTFLoader'
 import EventEmitter from "./EventEmitter"
 
 const loading = document.querySelector('.overlay')
-const label = document.querySelector('.label')
 
 export default class Resources extends EventEmitter {
     constructor(sources) {
@@ -22,12 +21,6 @@ export default class Resources extends EventEmitter {
                 window.setTimeout(() => {
                     loading.style.display = 'none'
                 }, 3000)
-            },
-
-            //progress
-            (itemUrl, itemsLoaded, itemsTotal) => {
-                const progress = Math.floor(itemsLoaded / itemsTotal * 100)
-                label.innerHTML = `${progress}%`
             }
         )
         this.items = {}

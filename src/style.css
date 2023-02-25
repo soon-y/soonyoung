@@ -67,6 +67,8 @@ a:hover {
     background-color: rgba(0, 0, 0, 0.8);
 }
 
+/* loading */
+
 .overlay {
     position: fixed;
     top: 0;
@@ -79,18 +81,35 @@ a:hover {
     z-index: 1000;
 }
 
-.overlay .label {
+.ring {
+    display: inline-block;
+    width: 100px;
+    height: 100px;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    text-align: center;
-    font-size: 50px;
-    background: -webkit-linear-gradient(#ff00cc, #00ffd5);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-family: 'Poppins', sans-serif;
-}
+  }
+  .ring:after {
+    content: " ";
+    display: block;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 8px solid #6fff00;
+    border-color: #6fff00 transparent #6fff00 transparent;
+    animation: ring 1.2s linear infinite;
+  }
+  @keyframes ring {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+
 
 /* --------------------------------
 contact 
@@ -114,46 +133,46 @@ form {
     color: rgba(255, 255, 255, 1);
 }
 
-input,
-textarea {
+input,textarea {
     width: 100%;
-    padding: 2vmin;
-    border-radius: 6vmin;
-    box-sizing: border-box;
     margin-top: 1vmin;
     margin-bottom: 1vmin;
+    padding: 1vmin;
     resize: vertical;
     font-family: 'Roboto', sans-serif;
     font-size: 2.4vmin;
-    background-color: rgba(255, 255, 255, 0.6);
+    background-color: transparent;
     border: none;
+    border-bottom: 1px solid #fff;
 }
 
 input:focus,
 textarea:focus {
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: transparent;
+    color: #fff;
 }
 
 input:valid,
 textarea:valid {
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: black;
+    color: #fff;
 }
 
 #submit {
+    border: none;
+    background-color: transparent;
     font-size: 3vmin;
     margin-top: 30px;
     font-family: 'Courier Prime', monospace;
-    background-color: rgba(204, 163, 255, 0.8);
     text-transform: uppercase;
-    color: #000;
+    color: #fff;
     cursor: pointer;
     -webkit-transition: .4s;
     transition: .4s;
 }
 
 #submit:hover {
-    background-color: rgba(161, 85, 255, 1);
-    color: #fff;
+    color: #33ff00;
 }
 
 #message {
@@ -341,7 +360,7 @@ textarea:valid {
 
 @media (max-width: 600px) {
     form {
-        width: 90vw;
+        width: 80vw;
     }
 
     .modal-content {
@@ -350,6 +369,16 @@ textarea:valid {
 
     button,
     a {
+        font-size: 4vmin;
+        line-height: 220%;
+    }
+
+    #submit {
+        font-size: 4vmin;
+    }
+
+    input,textarea {
+        padding: 0.5vmin;;
         font-size: 4vmin;
         line-height: 220%;
     }
@@ -383,15 +412,10 @@ textarea:valid {
 
   }
   
-  .button.round,
   .button.round .layer {
     border-radius: 100px;
   }
-  
-  .button.b2 {
-    border-radius: 2px;
-  }
-  
+    
   #checkbox {
     position: relative;
     width: 100%;
@@ -402,11 +426,7 @@ textarea:valid {
     cursor: pointer;
     z-index: 3;
   }
-  
-  .knobs {
-    z-index: 2;
-  }
-  
+    
   .layer {
     width: 100%;
     border: 1px solid #fff;
@@ -418,31 +438,20 @@ textarea:valid {
     font-family: 'Poppins', sans-serif;;
     content: "KO";
     position: absolute;
-    top: 2px;
-    left: 6px;
+    top: 3px;
+    left: 8px;
     width: 20px;
     height: 10px;
     color: #fff;
     font-size: 12px;
-    font-weight: bold;
     text-align: center;
     line-height: 1;
     padding: 9px 4px;
-    border-radius: 50%;
     transition: 0.3s ease all, left 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15);
   }
-  
-  #toggle #checkbox:active + .knobs:before {
-    width: 46px;
-    border-radius: 100px;
-  }
-  
-  #toggle #checkbox:checked:active + .knobs:before {
-    margin-left: -26px;
-  }
-  
+
   #toggle #checkbox:checked + .knobs:before {
     content: "EN";
-    left: 42px;
+    left: 40px;
   }
   
