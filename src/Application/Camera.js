@@ -43,7 +43,7 @@ export default class Camera {
     }
 
     parallax(event) {
-        let yTilt = Math.round(event.beta) * 0.3
+        let yTilt = Math.round(event.beta) * 0.1
         let xTilt = Math.round(event.gamma) * 0.3
 
         gsap.to(
