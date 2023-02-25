@@ -18,12 +18,19 @@ export default class Mouse extends EventEmitter {
             this.trigger('mousemove')
         })
 
+        window.addEventListener('touchstart', (event) => {
+            this.cursor.x = event.clientX / this.size.width * 2 - 1
+            this.cursor.y = - (event.clientY / this.size.height) * 2 + 1
+
+            this.trigger('mousemove')
+        })
+
         window.addEventListener('scroll', () => {
             this.scrollY = window.scrollY
             this.trigger('scroll')
         })
 
-        window.addEventListener('click', () => {
+        window.addEventListener('mousedown', () => {
             this.trigger('click')
         })
     }
