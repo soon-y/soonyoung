@@ -54,6 +54,7 @@ export default class Application {
 
         this.mouse.on('click', () => {
             this.world.click()
+            this.world.transfrom()
         })
     }
 
