@@ -45,9 +45,6 @@ export default class Application {
         this.mouse.on('mousemove', () => {
             this.raycaster.update()
             this.world.intersect()
-            if (this.isTouchDevice) {
-                this.world.mousedown()
-            }
         })
 
         this.mouse.on('scroll', () => {
@@ -56,6 +53,9 @@ export default class Application {
 
         this.mouse.on('click', () => {
             this.world.click()
+            if (this.isTouchDevice()) {
+                this.world.touch()
+            }
         })
     }
 

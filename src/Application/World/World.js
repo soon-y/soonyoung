@@ -49,7 +49,7 @@ export default class World {
         }
     }
 
-    mousedown(){
+    touch(){
         if (this.logo && this.project) {
             let objects = [this.project.project.mesh, this.project.threejs.mesh, this.project.java.mesh, this.project.design.mesh, this.logo.instance]
             let intersects = this.raycaster.instance.intersectObjects(objects)
