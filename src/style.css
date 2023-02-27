@@ -266,12 +266,13 @@ Modal Contents
     line-height: 160%;
 }
 
-.modal-content th{
+.modal-content th {
     background-color: rgba(237, 247, 255, 0.2);
     border-bottom: 1px solid #000;
     padding: 0.5rem 1rem;
 }
-.modal-content td{
+
+.modal-content td {
     border-bottom: 1px solid #ddd;
     padding: 0.5rem;
 }
@@ -569,5 +570,16 @@ Modal Contents
 
     .web {
         display: none;
+    }
+
+    .modal-content th {
+        background-color: rgba(237, 247, 255, 0.2);
+        border-bottom: 1px solid #000;
+        padding: 0.5rem 0.3rem;
+    }
+
+    .modal-content td {
+        border-bottom: 1px solid #ddd;
+        padding: 0.3rem;
     }
 }
