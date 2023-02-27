@@ -69,7 +69,6 @@ a:hover {
 }
 
 /* loading */
-
 .overlay {
     position: fixed;
     top: 0;
@@ -277,6 +276,22 @@ Modal Contents
     padding: 0.5rem;
 }
 
+.modal-content a {
+    padding: 0rem 0rem;
+}
+
+.uc-desc li {
+    list-style-type: disc;
+    list-style-position: inside;
+}
+
+.yellow {
+    color: rgb(255, 219, 40);
+}
+
+.pink {
+    color: rgb(255, 163, 142);
+}
 
 /* The Close Button */
 .close {
