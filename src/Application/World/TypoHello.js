@@ -124,10 +124,10 @@ export default class TypoHello {
     toEN() {
         let easeIn = 'back.in(2)'
         let inDuration = 2
-        let inDealy = 0.5
+        let inDealy = 0
         let out = 'elastic.out(1 ,0.5)'
         let outDuration = 2
-        let outDelay = 2.5
+        let outDelay = 2
 
         gsap.to(
             this.fromF.mesh.position,
