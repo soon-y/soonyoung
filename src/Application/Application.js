@@ -53,9 +53,6 @@ export default class Application {
 
         this.mouse.on('click', () => {
             this.world.click()
-            if (this.isTouchDevice()) {
-                this.world.touch()
-            }
         })
     }
 
@@ -69,11 +66,4 @@ export default class Application {
         this.renderder.update()
         this.world.update()
     }
-
-    isTouchDevice() {
-        return ('ontouchstart' in window) ||
-            (navigator.maxTouchPoints > 0) ||
-            (navigator.msMaxTouchPoints > 0);
-    }
-
 }
