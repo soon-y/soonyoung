@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap');
 
 * {
@@ -59,6 +59,7 @@ a {
     cursor: pointer;
     border: none;
     font-family: 'Courier Prime', monospace;
+    text-shadow: 1px 1px 1px #000;
 }
 
 button:hover,
@@ -89,9 +90,9 @@ a:hover {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-  }
+}
 
-  .ring:after {
+.ring:after {
     content: " ";
     display: block;
     width: 80px;
@@ -100,16 +101,17 @@ a:hover {
     border: 8px solid #6fff00;
     border-color: #6fff00 transparent #6fff00 transparent;
     animation: ring 1.2s linear infinite;
-  }
+}
 
-  @keyframes ring {
+@keyframes ring {
     0% {
-      transform: rotate(0deg);
+        transform: rotate(0deg);
     }
+
     100% {
-      transform: rotate(360deg);
+        transform: rotate(360deg);
     }
-  }
+}
 
 /* --------------------------------
 contact 
@@ -133,7 +135,8 @@ form {
     color: rgba(255, 255, 255, 1);
 }
 
-input,textarea {
+input,
+textarea {
     width: 100%;
     margin-top: 1vmin;
     margin-bottom: 1vmin;
@@ -185,42 +188,41 @@ textarea:valid {
 /* The Modal (background) */
 .modal {
     display: none;
-    /* Hidden by default */
     position: fixed;
-    /* Stay in place */
     z-index: 1;
-    /* Sit on top */
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
     overflow: auto;
-    /* Enable scroll if needed */
-    background-color: rgba(0, 0, 0, 0.4);
-    /* Black w/ opacity */
+    background-color: rgba(0, 0, 0, 0.8);
 }
 
-/* Modal Content */
+/* --------------------------------
+Modal Contents
+-------------------------------- */
+
 .modal-content {
     font-family: 'Roboto', sans-serif;
-    background-color: rgba(0, 0, 0, 0.6);
     width: 90%;
     margin: auto;
     color: #fff;
     text-align: center;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
+    background-color: rgba(0, 0, 0, 1);
+}
+
+.modal-head {
+    max-width: 600px;
+    margin: auto;
+    padding-top: 60px;
+    text-align: left;
 }
 
 .modal-content h1 {
     font-family: 'Courier Prime', monospace;
     color: #33ff00;
-    margin-bottom: 1vmin;
-}
-
-.modal h2 {
-    margin-bottom: 1vmin;
-    margin-top: 3vmin;
+    margin-bottom: 2vmin;
+    font-size: 4vmin;
 }
 
 .modal-content h3 {
@@ -228,7 +230,7 @@ textarea:valid {
 }
 
 .modal-content a {
-    font-size: large;
+    font-size: 2vmin;
 }
 
 .modal video {
@@ -237,14 +239,42 @@ textarea:valid {
 
 .modal-content img {
     max-width: 100%;
-    margin-bottom: 1vmin;
     max-height: 80%;
+    margin-bottom: 1vmin;
+}
+
+.modal-content .title {
+    max-width: 600px;
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    font-size: 3vmin;
+    font-family: 'Courier Prime', monospace;
 }
 
 .modal-content p {
     max-width: 600px;
     margin: auto;
     line-height: 160%;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.modal-content table {
+    max-width: 600px;
+    margin: auto;
+    text-align: left;
+    line-height: 160%;
+}
+
+.modal-content th{
+    background-color: rgba(237, 247, 255, 0.2);
+    border-bottom: 1px solid #000;
+    padding: 0.5rem 1rem;
+}
+.modal-content td{
+    border-bottom: 1px solid #ddd;
+    padding: 0.5rem;
 }
 
 
@@ -252,8 +282,8 @@ textarea:valid {
 .close {
     color: #ffffff;
     float: right;
-    font-size: 3vmin;
-    font-weight: bold;
+    font-size: 40px;
+    margin-top: 40px;
 }
 
 .close:hover,
@@ -267,79 +297,82 @@ textarea:valid {
 
 /* multieculture */
 #idea {
-    display: grid;
-    grid-template-columns: 50% 50%;
-    grid-template-rows: 50% 50%;
-    margin: auto;
     margin-bottom: 1vmin;
-    height: 80%;
+    height: 90vh;
 }
 
-#idea img-box {
-    height: 100%;
+.flex-container {
+    display: flex;
+    flex-direction: row;
     width: 100%;
-    margin: auto;
-    overflow: hidden;
+    height: 50%;
 }
 
-#idea img {
+#idea .left {
+    flex: 50%;
+}
+
+#idea .right {
+    flex: 50%;
+}
+
+#idea .first .left {
+    background: url(../images/multiculture/hex.jpg) no-repeat center;
+    background-size: cover;
+}
+
+#idea .first .right {
+    background: url(../images/multiculture/globe.jpg) no-repeat center;
+    background-size: cover;
+}
+
+#idea .second .left {
+    background: url(../images/multiculture/support.jpg) no-repeat center;
+    background-size: cover;
+}
+
+#idea .second .right {
+    background: url(../images/multiculture/network.jpg) no-repeat center;
+    background-size: cover;
+}
+
+.img-box {
+    position: relative;
     width: 100%;
     height: 100%;
-    max-width: none;
-    min-height: 50vh;
-    object-fit: cover;
-    object-position: center;
-    margin: 0;
-}
-
-#idea img:hover {
-    filter: grayscale(80%) contrast(60%);
+    background-color: transparent;
     -webkit-transition: .4s;
     transition: .4s;
 }
 
-#idea img:hover~h1 {
-    opacity: 1;
-    filter: blur(0px);
-    -webkit-transition: .4s;
-    transition: .4s;
-}
-
-#idea .hex {
-    grid-column: 1;
-    grid-row: 1;
+.img-box:hover {
     position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: grayscale(80%) blur(6px);
 }
 
-#idea .globe {
-    grid-column: 2;
-    grid-row: 1;
-    position: relative;
-}
-
-#idea .support {
-    grid-column: 1;
-    grid-row: 2;
-    position: relative;
-}
-
-#idea .network {
-    grid-column: 2;
-    grid-row: 2;
-    position: relative;
-}
-
-#idea h1 {
+.img-box p {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-family: roboto;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
     font-size: 4vmin;
     color: #fff;
-    filter: blur(6px);
-    opacity: 0;
+    filter: blur(10px);
     text-shadow: 0 0 30px #000;
+    -webkit-transition: .4s;
+    transition: .4s;
+    opacity: 0;
+}
+
+.img-box:hover p {
+    opacity: 1;
+    filter: blur(0px);
 }
 
 #dynamicLogoWrapper {
@@ -357,8 +390,90 @@ textarea:valid {
     transform: translate(-50%, -50%);
 }
 
-#pattern {
+#patternWrapper {
+    height: 80vh;
+    margin-bottom: 1vmin;
+    position: relative;
+    background: url(../images/multiculture/pattern.gif) no-repeat center;
+    background-size: cover;
+}
+
+/* toggle */
+
+.button-wrapper {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    height: 40px;
+}
+
+.button-cover,
+.knobs,
+.layer {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.button {
+    position: relative;
+    top: 50%;
+    width: 74px;
+    height: 36px;
+    margin: -20px auto 0 auto;
+}
+
+.button.round .layer {
+    border-radius: 100px;
+}
+
+#checkbox {
+    position: relative;
     width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 3;
+}
+
+.layer {
+    width: 100%;
+    border: 1px solid #fff;
+    transition: 0.3s ease all;
+    z-index: 1;
+}
+
+#toggle .knobs:before {
+    font-family: 'Poppins', sans-serif;
+    content: "KO";
+    position: absolute;
+    top: 3px;
+    left: 8px;
+    width: 20px;
+    height: 10px;
+    color: #fff;
+    font-size: 12px;
+    text-align: center;
+    line-height: 1;
+    padding: 9px 4px;
+    transition: 0.3s ease all, left 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15);
+}
+
+#toggle #checkbox:checked+.knobs:before {
+    content: "EN";
+    left: 40px;
+}
+
+.mobile {
+    display: none;
+}
+
+.web {
+    display: block;
 }
 
 @media (max-width: 600px) {
@@ -380,83 +495,64 @@ textarea:valid {
         font-size: 4.5vmin;
     }
 
-    input,textarea {
+    input,
+    textarea {
         padding: 0.5vmin;
         font-size: 4.5vmin;
         line-height: 220%;
         border-left: 6px solid #000;
         border-right: 6px solid #000;
     }
+
+    input:focus,
+    textarea:focus {
+        border-left: 6px solid #000;
+        border-right: 6px solid #000;
+    }
+
+    input:valid,
+    textarea:valid {
+        border-left: 6px solid #000;
+        border-right: 6px solid #000;
+    }
+
+    .flex-container {
+        flex-direction: column;
+    }
+
+
+    #idea .cover {
+        height: 100%;
+        min-height: 50%;
+    }
+
+    .modal-content h1 {
+        font-size: 8vmin;
+    }
+
+    .modal-content h3 {
+        margin-bottom: 5vmin;
+    }
+
+    .modal-content a {
+        font-size: 5vmin;
+    }
+
+    .modal-content .title {
+        margin-bottom: 2px;
+        font-size: 5vmin;
+        font-family: 'Courier Prime', monospace;
+    }
+
+    .close {
+        margin-top: 10px;
+    }
+
+    .mobile {
+        display: block
+    }
+
+    .web {
+        display: none;
+    }
 }
-
-/* toggle */
-  
-  .button-wrapper {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    height: 40px;
-  }
-  
-  .button-cover,
-  .knobs,
-  .layer {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-  }
-  
-  .button {
-    position: relative;
-    top: 50%;
-    width: 74px;
-    height: 36px;
-    margin: -20px auto 0 auto;
-
-  }
-  
-  .button.round .layer {
-    border-radius: 100px;
-  }
-    
-  #checkbox {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    padding: 0;
-    margin: 0;
-    opacity: 0;
-    cursor: pointer;
-    z-index: 3;
-  }
-    
-  .layer {
-    width: 100%;
-    border: 1px solid #fff;
-    transition: 0.3s ease all;
-    z-index: 1;
-  }
-  
-#toggle .knobs:before {
-    font-family: 'Poppins', sans-serif;;
-    content: "KO";
-    position: absolute;
-    top: 3px;
-    left: 8px;
-    width: 20px;
-    height: 10px;
-    color: #fff;
-    font-size: 12px;
-    text-align: center;
-    line-height: 1;
-    padding: 9px 4px;
-    transition: 0.3s ease all, left 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15);
-  }
-
-  #toggle #checkbox:checked + .knobs:before {
-    content: "EN";
-    left: 40px;
-  }
-  

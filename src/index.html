@@ -30,8 +30,11 @@
                 </div>
             </ul>
             <div class="java">
-                <button id="robotApp">
-                    cleaning robot app
+                <button id="autoMode">
+                    autoMode()
+                </button><br>
+                <button id="scheduleCleaning">
+                    scheduleCleaning()
                 </button><br>
                 <button id="village">
                     a village
@@ -70,30 +73,318 @@
 
     <button id="permission">Request permission for parallax effect</button>
 
-    <div id="robotAppModal" class="modal">
-        <!-- Modal content -->
+    <div id="autoModeModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
-            <h1>cleaning robot App</h1>
-            <h3>#2022 &nbsp;&nbsp; #Java &nbsp;&nbsp; #vertical prototype <br>
-                <a href="https://github.com/soon-y/robotAutoMode">&lt;/autoMode&gt;</a> <br>
-                <a href="https://github.com/soon-y/robotScheduleCleaning">&lt;/scheduleCleaning&gt;</a>
-            </h3>
-            <p></p>
-        </div>
+            <div class="modal-head">
+                <h1>autoMode()</h1>
+                <h3>#Java &nbsp;&nbsp; #vertical prototype
+                    <a href="https://github.com/soon-y/robotAutoMode" target="_blank">&lt;/code&gt;</a>
+                    <a href="https://soonyoung-p.github.io/soon/automode/doc/" target="_blank">&lt;Javadoc&gt;</a>
+                </h3>
+            </div>
+            <p>Objective: develop a cleaning robot system for a mobile robot platform based on Use case “Auto” mode.<br>
+                An on/off switch, as well as “auto”, “pause” and “home” buttons, are available to start cleaning in auto
+                mode while the robot is generating a map of the cleaning area, to pause it or send it back to the
+                charging station, respectively. The current status including map updates shall be sent to the app at
+                regular time intervals. The robot is presumed that it was equipped with all sensors and effectors
+                necessary for securely moving over plain and rough floors and not falling down any steps, for dry and
+                wet cleaning, and for navigation with a laser scanner.
+            </p>
 
+            <div class=uc-desc>
+                <table>
+                    <p class="title">Use Case Description</p>
+                    <tr>
+                        <th scope="row">Use Case</th>
+                        <td>AutoMode</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Related Requirements</th>
+                        <td><strong>REQ-3</strong>: When the 'Auto' button is pressed, the robot starts cleaning
+                            while generating a map and also updating its location in that map. <br>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Initiating Actor</th>
+                        <td>User</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Actor's goal</th>
+                        <td>To make the robot clean while generating a map and updating its location</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Participating Actors</th>
+                        <td>APP, Drive system, Navigation system</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Preconditions</th>
+                        <td>
+                            <ul>
+                                <li>- The “Auto” button is pressed.</li>
+                                <li>- Battery level is higher than the minimum battery value.</li>
+                                <li>- The robot is authorized and connected to the APP via local WIFI.</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Postconditions</th>
+                        <td>The cleaning robot goes back to charging dock when it finishes or the battery is less than
+                            minimum setting. </td>
+                    </tr>
+                    <tr>
+                        <th scope="row" colspan="2">Flow of Events for Main Success Scenario</th>
+                    </tr>
+                    <tr>
+                        <td> → </td>
+                        <td>1. <strong>USER</strong> opens the APP and presses "Auto".
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> ← </td>
+                        <td>2. <strong>Drive system</strong> checks the current battery. </td>
+                    </tr>
+                    <tr>
+                        <td> </td>
+                        <td>3. <em><u>include:: CheckBattery (To update current battery status)</u></em> </td>
+                    </tr>
+                    <tr>
+                        <td> ← </td>
+                        <td>4. <strong>Navigation system</strong> signals to the Robot System to scan the surrounding
+                            area for generating a map. </td>
+                    </tr>
+                    <tr>
+                        <td> </td>
+                        <td>5. <em><u>include:: GenerateMap (To generate a map via LiDAR scanning and send the data to
+                                    the App)</u></em> </td>
+                    </tr>
+                    <tr>
+                        <td> ← </td>
+                        <td>6. <strong>Navigation system</strong> signals to <strong>Robot system</strong> the path.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> </td>
+                        <td>7. <strong>Drive system</strong> operates. </td>
+                    </tr>
+                    <tr>
+                        <td> ← </td>
+                        <td>8. <strong>Navigation System</strong> signals to the <strong>APP</strong> the location of
+                            the robot at regular time intervals.</td>
+                    </tr>
+                    <tr>
+                        <td> </td>
+                        <td>9. <em><u>include:: SendLocation (UC-11)</u></em> </td>
+                    </tr>
+                    <tr>
+                        <td> ← </td>
+                        <td>10. <strong>Drive system</strong> keeps checking the current battery. </td>
+                    </tr>
+                    <tr>
+                        <td> </td>
+                        <td>11. <em><u>include:: CheckBattery (To send the app the current location at regular time
+                                    intervals)</u></em> </td>
+                    </tr>
+                    <tr>
+                        <th scope="row" colspan="2">Flow of Events for Extensions (Alternate Scenarios) </th>
+                    </tr>
+                    <tr>
+                        <td> ← </td>
+                        <td>2a. If the bettery level is less than minimum value, <strong>Drive system</strong> signals
+                            to the <strong>APP</strong> to alert and stay at the charging dock.</td>
+                    </tr>
+                    <tr>
+
+                        <td colspan="2">6a. <strong>Robot System</strong> detects obstacles and floor material while
+                            cleaning. </td>
+                    </tr>
+                    <tr>
+                        <td> ← </td>
+                        <td>The <strong>Navigation system</strong> signals to the <strong>Robot system</strong> when it
+                            detects obstacles(stairs, furniture) and updates the new path.</td>
+                    </tr>
+                    <tr>
+                        <td> ← </td>
+                        <td>The <strong>Drive system</strong> signals to the <strong>Robot system</strong> to detect the
+                            floor material through the amount of dirt and operate in wet/dry mode.</td>
+                    </tr>
+                </table>
+            </div>
+            <p class="title">Activity diagram</p>
+            <img src="../images/autoMode/activity-diagram.png" alt="activity diagram">
+            <p class="title">Class diagram</p>
+            <p class="yellow">Observer pattern: Child Observers run various conditions depending on Subject.</p>
+            <p class="pink">Decorator pattern: decorations such as obstacle, segment are added when they are detected.
+            </p>
+            Iterator(traverse inherited classes of Observer), Singleton(boundaries have only one instance) also used.
+            <img src="../images/autoMode/class-diagram.jpg" alt="class diagram">
+            <p class="title">Demo</p>
+            <video controls>
+                <source src="../images/autoMode/demo.mp4" type="video/mp4">
+                Your browser does not support HTML video.
+            </video>
+        </div>
+    </div>
+
+    <div id="scheduleCleaningModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="modal-head">
+                <h1>scheduleCleaning()</h1>
+                <h3>#Java &nbsp;&nbsp; #vertical prototype #MVC
+                    <a href="https://github.com/soon-y/robotScheduleCleaning" target="_blank">&lt;code&gt;</a>
+                    <a href="https://soonyoung-p.github.io/soon/schedule-cleaning/doc/"
+                        target="_blank">&lt;Javadoc&gt;</a>
+                </h3>
+            </div>
+            <p>Objective: Develop a cleaning robot app for mobile devices based on Use case "schedule cleaning".<br>
+                The app is used to control the cleaning activities such as "auto" mode and "region/room" mode.
+                Alongside, it is possible to plan the cleaning with the specific cleaning mode, time and area. In
+                "region" or "room" mode, the user shall be able to define regions or rooms on the map that offers
+                autogenerated area segments. Presume that the robot has been registered with the authorized app.
+            </p>
+
+            <div class=uc-desc>
+                <p class="title">Use Case Description</p>
+                <table>
+                    <tr>
+                        <th scope="row">Use Case</th>
+                        <td>ScheduleCleaning</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Related Requirements</th>
+                        <td><b>REQ-1</b>: In the “room” mode, the user can define rooms segmented by walls <br>
+                            <b>REQ-2</b>: In the “region” mode, the APP shall grant the user to define areas as regions.
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Initiating Actor</th>
+                        <td>User</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Actor's goal</th>
+                        <td>To schedule the future cleaning jobs</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Participating Actors</th>
+                        <td>Robot system</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Preconditions</th>
+                        <td>
+                            <ul>
+                                <li>- The defined rooms and regions are empty.</li>
+                                <li>- The robot is turned on and charged.</li>
+                                <li>- User is logged in to the APP.</li>
+                                <li>- The map is already generated.</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Postconditions</th>
+                        <td>The data has been successfully saved. </td>
+                    </tr>
+                    <tr>
+                        <th scope="row" colspan="2">Flow of Events for Main Success Scenario</th>
+                    </tr>
+                    <tr>
+                        <td> → </td>
+                        <td>1. <strong>USER</strong> opens the <strong>APP</strong> and presses “schedule”. </td>
+                    </tr>
+                    <tr>
+                        <td> ← </td>
+                        <td>2. <strong>APP</strong> signals to Robot System to send the latest scanned data. </td>
+                    </tr>
+                    <tr>
+                        <td> → </td>
+                        <td>3. <strong>USER</strong> names the cleaning job on the <strong>APP</strong>. </td>
+                    </tr>
+                    <tr>
+                        <td> → </td>
+                        <td>4. <strong>USER</strong> selects the time to clean on the <strong>APP</strong>. </td>
+                    </tr>
+                    <tr>
+                        <td> → </td>
+                        <td>5. <strong>USER</strong> decides whether or not to repeat the cleaning job on the
+                            <strong>APP</strong>.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> → </td>
+                        <td>6. <strong>USER</strong> selects the days to to repeat on the <strong>APP</strong>. </td>
+                    </tr>
+                    <tr>
+                        <td> → </td>
+                        <td>7. <strong>USER</strong> views the map on the <strong>APP</strong>. </td>
+                    </tr>
+                    <tr>
+                        <td> </td>
+                        <td>8. <em><u>include:: ViewMap (To view the generated map in the APP) </u></em></td>
+                    </tr>
+                    <tr>
+                        <td> → </td>
+                        <td>9. <strong>USER</strong> selects room(s) to clean on the <strong>APP</strong>. </td>
+                    </tr>
+                    <tr>
+                        <td> </td>
+                        <td>10. <em><u>include:: defineRoom (To define rooms for the future planning) </u></em></td>
+                    </tr>
+                    <tr>
+                        <td> ← </td>
+                        <td>11. <strong>APP</strong> signals to the <strong>Robot System</strong> to save the data [and
+                            Robot operates according to schedule.] </td>
+                    </tr>
+                    <tr>
+                        <th scope="row" colspan="2">Flow of Events for Extensions (Alternate Scenarios) </th>
+                    </tr>
+                    <tr>
+                        <td> → </td>
+                        <td>6a. <strong>USER</strong> select the date to clean on the <strong>APP</strong>. </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">6b. <strong>USER</strong> selects non-valide time.(e.g- time in the past) </td>
+                    </tr>
+                    <tr>
+                        <td> ← </td>
+                        <td><strong>APP</strong> (a) detects an error, (b) pops up the alert, and (c) reset the time.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> → </td>
+                        <td>9a. <strong>USER</strong> selects regions to clean on the APP. </td>
+                    </tr>
+                </table>
+            </div>
+            <p class="title">Activity Diagram</p>
+            <img src="../images/scheduleCleaning/activity-diagram.png" alt="activity diagram">
+            <p class="title">Class diagram</p>
+            <p>Model–view–controller, Singleton used.</p>
+            <img src="../images/scheduleCleaning/class-diagram.png" alt="class diagram">
+            <p class="title">Prototype</p>
+            <img src="../images/scheduleCleaning/prototype.jpg" alt="prototype">
+            <p class="title">Video Demo</p>
+            <video controls>
+                <source src="../images/scheduleCleaning/demo.mp4" type="video/mp4">
+                Your browser does not support HTML video.
+            </video>
+        </div>
     </div>
 
     <div id="villageModal" class="modal">
-        <!-- Modal content -->
         <div class="modal-content">
             <span class="close">&times;</span>
-            <h1>a village</h1>
-            <h3>#2021 &nbsp;&nbsp; #Java &nbsp;&nbsp; <a href="https://github.com/soon-y/village"> &lt;/code&gt;</a>
-            </h3>
-            <h2>UML Diagram</h2>
+            <div class="modal-head">
+                <h1>a village</h1>
+                <h3>#Java &nbsp;&nbsp; <a href="https://github.com/soon-y/village" target="_blank"> &lt;/code&gt;</a>
+                </h3>
+            </div>
+            <p>It is my first JAVA project(2021). I was intrigued by drawing some graphics and adding GUI on JFrame. It was
+                such an experience which taught me what object-oriented programming was, inheritance and association,
+                State pattern was used to change the state once a button clicked..
+            </p>
+            <p class="title">UML Diagram</p>
             <img src="../images/village/uml.jpg" alt="uml diagram">
-            <h2>Video Demo</h2>
+            <p class="title">Video Demo</p>
             <video controls>
                 <source src="../images/village/video.mp4" type="video/mp4">
                 Your browser does not support HTML video.
@@ -103,42 +394,65 @@
     </div>
 
     <div id="multicultureModal" class="modal">
-        <!-- Modal content -->
         <div class="modal-content">
             <span class="close">&times;</span>
-            <h1>multiculture museum</h1>
-            <h3>#2014 &nbsp;&nbsp; #Brainding &nbsp;&nbsp; </h3>
-
-            <img src="../images/multiculture/m-logo.png" alt="uml diagram">
-            <h2>logo ideas</h2>
+            <div class="modal-head">
+                <h1>multiculture museum</h1>
+                <h3>#Branding &nbsp;&nbsp; #Graphics</h3>
+            </div>
+            <p>For my branding class assignment(2014), I redesigned the branding of Multiculture Museum located
+                in Seoul, Korea. It displayed miniature landmarks, currency, traditional clothing, and the culture of
+                each country, and provided visitors with a variety of experiences and the feelings of travelling all
+                around the world. <br>
+                The regular hexagon is geometrically stable and easy to expand with minimal costs, as seen in nature
+                like a honeycomb. I thought it was similar to the globe where each country communicate and expands its
+                culture. The CMYK colour model and connections between each vertex indicate the diversity of cultures
+                intricately intertwined.
+            </p>
+            <img class="web" src="../images/multiculture/m-logo.png" alt="logo">
+            <img class="mobile" src="../images/multiculture/m-logo-mobile.png" alt="logo">
+            <p class="title">logo ideas</p>
             <div id="idea">
-                <div class="img-box hex">
-                    <img src="../images/multiculture/hex.jpg">
-                    <H1>Connection</H1>
+                <div class="first flex-container">
+                    <div class="left">
+                        <div class="img-box">
+                            <p>Connection</p>
+                        </div>
+                    </div>
+                    <div class="right">
+                        <div class="img-box">
+                            <p>Globe</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="img-box globe">
-                    <img src="../images/multiculture/globe.jpg">
-                    <H1>Globe</H1>
-                </div>
-                <div class="img-box support">
-                    <img src="../images/multiculture/support.jpg">
-                    <H1>Support</H1>
-                </div>
-                <div class="img-box network">
-                    <img src="../images/multiculture/network.jpg">
-                    <H1>Network</H1>
+                <div class="second flex-container">
+                    <div class="left">
+                        <div class="img-box">
+                            <p>Support</p>
+                        </div>
+                    </div>
+                    <div class="right">
+                        <div class="img-box">
+                            <p>Network</p>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <img src="../images/multiculture/color.png" alt="uml diagram">
-            <img src="../images/multiculture/font.png" alt="uml diagram">
+            <img class="web" src="../images/multiculture/color.png" alt="brand color">
+            <img class="web" src="../images/multiculture/font.png" alt="brand typography">
+            <img class="mobile" src="../images/multiculture/color-mobile.png" alt="brand color">
+            <img class="mobile" src="../images/multiculture/font-mobile.png" alt="brand typography">
             <div id="dynamicLogoWrapper">
-                <img id="dynamicLogo" src="../images/multiculture/dynamic-logo.gif" alt="uml diagram">
+                <img id="dynamicLogo" src="../images/multiculture/dynamic-logo.gif" alt="dynamic logo">
             </div>
-            <img id="pattern" src="../images/multiculture/pattern.gif" alt="uml diagram">
-            <img src="../images/multiculture/stationery.png" alt="uml diagram">
-            <img src="../images/multiculture/bag.png" alt="uml diagram">
-
-
+            <div id="patternWrapper">
+            </div>
+            <img class="web" src="../images/multiculture/stationery.png" alt="stationery">
+            <img class="mobile" src="../images/multiculture/stationery-mobile.png" alt="stationery">
+            <img class="web" src="../images/multiculture/bag.png" alt="bag">
+            <img class="mobile" src="../images/multiculture/bag-mobile.png" alt="bag">
+            <img class="web" src="../images/multiculture/ticket.png" alt="ticket">
+            <img class="mobile" src="../images/multiculture/ticket-mobile.png" alt="ticket">
         </div>
 
     </div>
