@@ -31,10 +31,10 @@
             </ul>
             <div class="java">
                 <button id="autoMode">
-                    autoMode()
+                    auto mode
                 </button><br>
                 <button id="scheduleCleaning">
-                    scheduleCleaning()
+                    schedule cleaning
                 </button><br>
                 <button id="village">
                     a village
@@ -77,13 +77,14 @@
         <div class="modal-content">
             <span class="close">&times;</span>
             <div class="modal-head">
-                <h1>autoMode()</h1>
+                <h1>auto mode</h1>
                 <h3>#Java &nbsp; #Vertical prototype &nbsp;
                     <a href="https://github.com/soon-y/robotAutoMode" target="_blank">&lt;code&gt;</a> &nbsp;
                     <a href="https://soonyoung-p.github.io/soon/automode/doc/" target="_blank">&lt;Javadoc&gt;</a>
                 </h3>
             </div>
-            <p><strong>Objective</strong>: develop a cleaning robot system for a mobile robot platform based on Use case “Auto” mode.<br>
+            <p><strong>Objective</strong>: Develop a cleaning robot system for a mobile robot platform based on Use case
+                “Auto” mode.<br>
                 An on/off switch, as well as “auto”, “pause” and “home” buttons, are available to start cleaning in auto
                 mode while the robot is generating a map of the cleaning area, to pause it or send it back to the
                 charging station, respectively. The current status including map updates shall be sent to the app at
@@ -146,7 +147,8 @@
                     </tr>
                     <tr>
                         <td> </td>
-                        <td>3. <em><u>include:: <strong>CheckBattery</strong>(To update current battery status)</u></em> </td>
+                        <td>3. <em><u>include:: <strong>CheckBattery</strong>(To update current battery status)</u></em>
+                        </td>
                     </tr>
                     <tr>
                         <td> ← </td>
@@ -155,7 +157,8 @@
                     </tr>
                     <tr>
                         <td> </td>
-                        <td>5. <em><u>include:: <strong>GenerateMap</strong>(To generate a map via LiDAR scanning and send the data to
+                        <td>5. <em><u>include:: <strong>GenerateMap</strong>(To generate a map via LiDAR scanning and
+                                    send the data to
                                     the App)</u></em> </td>
                     </tr>
                     <tr>
@@ -182,8 +185,14 @@
                     </tr>
                     <tr>
                         <td> </td>
-                        <td>11. <em><u>include:: <strong>CheckBattery</strong>(To send the app the current location at regular time
-                                    intervals)</u></em> </td>
+                        <td>11. <em><u>include:: <strong>CheckBattery</strong>(To send the app the current location at
+                                    regular time intervals)</u></em> </td>
+                    </tr>
+                    <tr>
+                        <td> </td>
+                        <td>12. <strong>Robot System</strong> ends its operation when the cleaning is completed [and <strong>Drive System</strong>
+                            drives back to the charging dock.]
+                        </td>
                     </tr>
                     <tr>
                         <th scope="row" colspan="2">Flow of Events for Extensions (Alternate Scenarios) </th>
@@ -194,28 +203,49 @@
                             to the <strong>APP</strong> to alert and stay at the charging dock.</td>
                     </tr>
                     <tr>
-
                         <td colspan="2">6a. <strong>Robot System</strong> detects obstacles and floor material while
                             cleaning. </td>
                     </tr>
                     <tr>
                         <td> ← </td>
-                        <td>The <strong>Navigation system</strong> signals to the <strong>Robot system</strong> when it
+                        <td><strong>Navigation system</strong> signals to the <strong>Robot system</strong> when it
                             detects obstacles(stairs, furniture) and updates the new path.</td>
                     </tr>
                     <tr>
                         <td> ← </td>
-                        <td>The <strong>Drive system</strong> signals to the <strong>Robot system</strong> to detect the
+                        <td><strong>Drive system</strong> signals to the <strong>Robot system</strong> to detect the
                             floor material through the amount of dirt and operate in wet/dry mode.</td>
+                    </tr>
+                    <tr>
+                        <td> ← </td>
+                        <td>10a. If the bettery level is less than minimum value, <strong>Drive system</strong> signals
+                            to the <strong>APP</strong> to alert and moves back to the charging dock.</td>
+                    </tr>
+                    <tr>
+                        <td> → </td>
+                        <td>12a-1. When <strong>User</strong> presses "pause" button, <strong>Robot System</strong> pause its operation.</td>
+                    </tr>
+                    <tr>
+                        <td> → </td>
+                        <td>12a-2. When <strong>User</strong> presses "resume" button, <strong>Robot System</strong> resume its operation.</td>
+                    </tr>
+                    <tr>
+                        <td> → </td>
+                        <td>12b. When <strong>User</strong> presses "Home" button, 
+                            <strong>Robot System</strong> ends its operation and <strong>Drive system</strong> drives back to the charging dock.</td>
                     </tr>
                 </table>
             </div>
-            <p class="title">Activity diagram</p>
+            <p class="title">Activity Diagram</p>
             <img src="../images/autoMode/activity-diagram.png" alt="activity diagram">
             <p class="title">Class diagram</p>
-            <p><span class="yellow"><strong>Observer pattern</strong></span>: Child Observers run various conditions depending on Subject.<br>
-            <span class="pink"><strong>Decorator pattern</strong></span>: decorations such as obstacle, segment are added on the map when they are detected.<br>
-            <strong>Iterator</strong>(traverse inherited classes of Observer), <strong>Singleton</strong>(boundaries have only one instance) also used.</p>
+            <p><span class="yellow"><strong>Observer pattern</strong></span>: Child Observers run various conditions
+                depending on Subject.<br>
+                <span class="pink"><strong>Decorator pattern</strong></span>: decorations such as obstacle, segment are
+                added on the map when they are detected.<br>
+                <strong>Iterator</strong>(traverse inherited classes of Observer), <strong>Singleton</strong>(boundaries
+                have only one instance) also used.
+            </p>
             <img src="../images/autoMode/class-diagram.jpg" alt="class diagram">
             <p class="title">Video Demo</p>
             <video controls>
@@ -229,14 +259,15 @@
         <div class="modal-content">
             <span class="close">&times;</span>
             <div class="modal-head">
-                <h1>scheduleCleaning()</h1>
-                <h3>#Java &nbsp; #Vertical prototype &nbsp; #MVC &nbsp; 
+                <h1>schedule cleaning</h1>
+                <h3>#Java &nbsp; #Vertical prototype &nbsp; #MVC &nbsp;
                     <a href="https://github.com/soon-y/robotScheduleCleaning" target="_blank">&lt;code&gt;</a> &nbsp;
                     <a href="https://soonyoung-p.github.io/soon/schedule-cleaning/doc/"
                         target="_blank">&lt;Javadoc&gt;</a>
                 </h3>
             </div>
-            <p><strong>Objective</strong>: Develop a cleaning robot app for mobile devices based on Use case "schedule cleaning".<br>
+            <p><strong>Objective</strong>: Develop a cleaning robot app for mobile devices based on Use case "schedule
+                cleaning".<br>
                 The app is used to control the cleaning activities such as "auto" mode and "region/room" mode.
                 Alongside, it is possible to plan the cleaning with the specific cleaning mode, time and area. In
                 "region" or "room" mode, the user shall be able to define regions or rooms on the map that offers
@@ -253,7 +284,8 @@
                     <tr>
                         <th scope="row">Related Requirements</th>
                         <td><b>DefineRoom</b>: In the “room” mode, the user can define rooms segmented by walls <br>
-                            <b>DefineRegion</b>: In the “region” mode, the APP shall grant the user to define areas as regions.
+                            <b>DefineRegion</b>: In the “region” mode, the APP shall grant the user to define areas as
+                            regions.
                         </td>
                     </tr>
                     <tr>
@@ -318,7 +350,8 @@
                     </tr>
                     <tr>
                         <td> </td>
-                        <td>8. <em><u>include:: <strong>ViewMap</strong>(To view the generated map in the APP) </u></em></td>
+                        <td>8. <em><u>include:: <strong>ViewMap</strong>(To view the generated map in the APP) </u></em>
+                        </td>
                     </tr>
                     <tr>
                         <td> → </td>
@@ -326,7 +359,8 @@
                     </tr>
                     <tr>
                         <td> </td>
-                        <td>10. <em><u>include:: <strong>defineRoom</strong>(To define rooms for the future planning) </u></em></td>
+                        <td>10. <em><u>include:: <strong>defineRoom</strong>(To define rooms for the future planning)
+                                </u></em></td>
                     </tr>
                     <tr>
                         <td> ← </td>
@@ -356,8 +390,9 @@
             </div>
             <p class="title">Activity Diagram</p>
             <img src="../images/scheduleCleaning/activity-diagram.png" alt="activity diagram">
-            <p class="title">Class diagram</p>
-            <p><strong>Model–view–controller</strong>, <strong>Singleton</strong>(boundaries have only one instance) used.</p>
+            <p class="title">Class Diagram</p>
+            <p><strong>Model–view–controller</strong>, <strong>Singleton</strong>(boundaries have only one instance)
+                used.</p>
             <img src="../images/scheduleCleaning/class-diagram.png" alt="class diagram">
             <p class="title">Prototype</p>
             <img src="../images/scheduleCleaning/prototype.jpg" alt="prototype">
@@ -374,13 +409,15 @@
             <span class="close">&times;</span>
             <div class="modal-head">
                 <h1>a village</h1>
-                <h3>#Java &nbsp; #Java &nbsp;
+                <h3>#Java &nbsp; #GUI &nbsp;
                     <a href="https://github.com/soon-y/village" target="_blank"> &lt;/code&gt;</a>
                 </h3>
             </div>
-            <p>It is my first Java project(2021).  I was intrigued by drawing some graphics and adding GUI on JFrame. It was
-                such an experience that taught me what object-oriented programming was, inheritance and association, and so on.
-                Each object is associated to form a completed object like a house, a streetlight or cloud. 
+            <p>It is my first Java project(2021). I was intrigued by drawing some graphics and adding GUI on JFrame. It
+                was
+                such an experience that taught me what object-oriented programming was, inheritance and association, and
+                so on.
+                Each object is associated to form a completed object like a house, a streetlight or cloud.
                 And buttons control what is to be drawn on JFrame with State pattern.
             </p>
             <p class="title">UML Diagram</p>
@@ -401,12 +438,15 @@
                 <h1>multiculture museum</h1>
                 <h3>#Branding &nbsp; #Graphics</h3>
             </div>
-            <p>For my branding class assignment(2014), I designed branding for Multiculture Museum located in Seoul, Korea. 
-                People could enjoy miniature landmarks, currency, and traditional costumes there. 
-                It provided visitors with a variety of multicultural experiences and the feeling of traveling all around the world. <br>
-                The regular hexagon is geometrically stable and easy to expand, as seen in nature, like a honeycomb. 
-                I thought it was similar to a globe where each country communicates and expands its culture. 
-                The CMYK colour model and connections between each vertex represent the diversity of cultures intricately intertwined.
+            <p>For my branding class assignment(2014), I designed branding for Multiculture Museum located in Seoul,
+                Korea.
+                People could enjoy miniature landmarks, currency, and traditional costumes there.
+                It provided visitors with a variety of multicultural experiences and the feeling of traveling all around
+                the world. <br>
+                The regular hexagon is geometrically stable and easy to expand, as seen in nature, like a honeycomb.
+                I thought it was similar to a globe where each country communicates and expands its culture.
+                The CMYK colour model and connections between each vertex represent the diversity of cultures
+                intricately intertwined.
             </p>
             <img class="web" src="../images/multiculture/m-logo.png" alt="logo">
             <img class="mobile" src="../images/multiculture/m-logo-mobile.png" alt="logo">
