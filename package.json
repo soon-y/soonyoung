@@ -1,5 +1,5 @@
 {
-  "name": "threejs-journey-exercise",
+  "name": "portfolio",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -12,7 +12,6 @@
   },
   "dependencies": {
     "gsap": "^3.11.4",
-    "lil-gui": "^0.17.0",
     "three": "^0.148.0"
   }
 }
