@@ -15,5 +15,5 @@
 - Vite.js; provided by [Three.js journey](https://threejs-journey.com/)
 
 
-## 3. issue
+## 3. Issues
 - Raycaster does not work on Google and Safari on an IPhone.
