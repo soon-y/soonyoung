@@ -17,7 +17,7 @@ export default class Billiards {
     this.scene.add(this.instance);
     this.instance.rotation.y = Math.PI * 0.85;
     //this.instance.add(new THREE.AxesHelper(25));
-    this.rotation = 0.001;
+    this.rotation = this.application.time.delta * 0.1;
   }
 
   setGeometry() {
@@ -48,27 +48,6 @@ export default class Billiards {
     this.instance.rotation.x += this.rotation;
     this.instance.rotation.z -= this.rotation;
     this.instance.rotation.y += this.rotation;
-  }
-
-  hover() {
-    gsap.to(this.instance.rotation, {
-      duration: 2,
-      z: -Math.PI * 8,
-      ease: "power2.inout",
-    });
-
-    gsap.to(this.instance.rotation, {
-      duration: 1,
-      y: Math.PI * 0.85,
-      ease: "power2.inout",
-    });
-
-    gsap.to(this.instance.rotation, {
-      duration: 1,
-      x: 0,
-      ease: "power2.inout",
-    });
-
-    this.instance.rotation.z = 0;
+    this.instance.position.y = Math.sin(this.application.time.elapsed) * 2;
   }
 }

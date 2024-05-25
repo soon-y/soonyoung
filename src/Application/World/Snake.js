@@ -14,12 +14,12 @@ export default class Snake {
     this.tongue = this.resources.items.tongue;
     this.eyelid = this.resources.items.eyelid;
     this.instance = new THREE.Group();
-    this.angle = -Math.PI/4;
-    this.instance.rotation.y = this.angle;
+    this.instance.rotation.y = -Math.PI/3;
 
     this.setModel();
-    this.flick();
-    this.blink();
+    this.flicking();
+    this.blinking();
+    this.openMouth();
   }
 
   setModel() {
@@ -55,32 +55,10 @@ export default class Snake {
     );
 
     this.scene.add(this.instance);
-    this.instance.scale.multiplyScalar(param.diameter * 3);
+    this.instance.scale.multiplyScalar(param.diameter * 3.4);
   }
 
-  hover() {
-    let duration = 0.4;
-    gsap.to(this.snakemouth.rotation, {
-      x: -Math.PI / 4,
-      duration: duration,
-    });
-
-    gsap.to(this.snakemouth.rotation, {
-      x: 0,
-      duration: duration,
-      delay: duration,
-    });
-
-    gsap.to(this.instance.rotation, {
-      duration: 1,
-      y: Math.PI * 2 + this.angle,
-      ease: "power2.inout",
-    });
-
-    this.instance.rotation.y = this.angle;
-  }
-
-  flick() {
+  flicking() {
     let flick = gsap.timeline({ repeat: -1, repeatDelay: 3 });
     let duration = 0.2;
     flick.to(this.snaketongue.position, {
@@ -93,7 +71,20 @@ export default class Snake {
     });
   }
 
-  blink() {
+  openMouth(){
+    let duration = 0.4;
+    let action = gsap.timeline({ repeat: -1, repeatDelay: 10 });
+    action.to(this.snakemouth.rotation, {
+      x: -Math.PI / 4,
+      duration: duration,
+    });
+    action.to(this.snakemouth.rotation, {
+      x: 0,
+      duration: duration,
+    });
+  }
+
+  blinking() {
     let duration = 0.2;
     let eyeR = gsap.timeline({ repeat: -1, repeatDelay: 2 });
     let eyeL = gsap.timeline({ repeat: -1, repeatDelay: 2 });
@@ -139,5 +130,10 @@ export default class Snake {
       x: Math.PI - Math.PI / 4,
       duration: duration,
     });
+  }
+
+  update() {
+    this.instance.position.y = Math.sin(this.application.time.elapsed)*2;
+    this.instance.rotation.y += Math.sin(this.application.time.elapsed)*0.01;
   }
 }

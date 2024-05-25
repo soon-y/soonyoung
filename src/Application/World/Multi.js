@@ -25,30 +25,6 @@ export default class Multi {
     this.instance.rotation.x += this.rotation;
     this.instance.rotation.z += this.rotation;
     this.instance.rotation.y += this.rotation;
-  }
-
-  hover() {
-    let duration = 1
-    gsap.to(this.instance.rotation, {
-      duration: duration,
-      x: -Math.PI * 2,
-      ease: "power2.inout",
-    });
-
-    gsap.to(this.instance.rotation, {
-      duration: duration,
-      y: -Math.PI * 2,
-      ease: "power2.inout",
-    });
-
-    gsap.to(this.instance.rotation, {
-      duration: duration,
-      z: -Math.PI * 2,
-      ease: "power2.inout",
-    });
-    
-    this.instance.rotation.x = 0;
-    this.instance.rotation.y = 0;
-    this.instance.rotation.z = 0;
+    this.instance.position.y = Math.sin(this.application.time.elapsed) * 2;
   }
 }
