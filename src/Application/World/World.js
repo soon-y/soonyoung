@@ -7,9 +7,10 @@ import Particle from "./Particle";
 import Snake from "./Snake";
 import gsap from "gsap";
 import Billiards from "./Billiards";
-import TypoCode from "./TypoCode";
+import TypoLog from "./TypoLog";
 import Dewy from "./Dewy";
 import Multi from "./Multi";
+import "hammerjs";
 
 const checkbox = document.getElementById("checkbox");
 const btnRyt = document.querySelector(".fa-arrow-right");
@@ -25,14 +26,15 @@ let currentPos;
 const step = Math.PI / 3;
 
 export default class World {
-  constructor() {
+  constructor(canvas) {
     this.application = new Application();
     this.size = this.application.sizes;
     this.scene = this.application.scene;
     this.resources = this.application.resources;
     this.raycaster = this.application.raycaster;
-    //this.mouse = this.application.mouse.cursor;
     this.camera = this.application.camera.instance;
+    this.hammer = new Hammer(canvas)
+    this.hammer.get("swipe").set({ direction: Hammer.DIRECTION_HORIZONTAL});
     this.currentIntersect = null;
 
     // Wait for resources
@@ -42,7 +44,7 @@ export default class World {
       this.particle = new Particle();
       this.snake = new Snake();
       this.ball = new Billiards();
-      this.code = new TypoCode();
+      this.log = new TypoLog();
       this.dewy = new Dewy();
       this.multi = new Multi();
       this.group = new THREE.Group();
@@ -51,7 +53,7 @@ export default class World {
         this.snake.instance,
         this.ball.instance,
         this.dewy.instance,
-        this.code.instance,
+        this.log.instance,
         this.multi.instance,
         this.logo.logo
       );
@@ -74,12 +76,22 @@ export default class World {
       }
     });
 
+    this.hammer.on("swipeleft", () =>{
+      this.moveArrow(currentTarget + step, -1);
+    });
+
+    this.hammer.on("swiperight", () =>{
+      this.moveArrow(currentTarget - step, 1);
+    });
+
     btnRyt.addEventListener("click", () => {
       this.moveArrow(currentTarget + step, -1);
     });
+
     btnLeft.addEventListener("click", () => {
       this.moveArrow(currentTarget - step, 1);
     });
+
     btnDown.addEventListener("click", () => {
       gsap.to(this.camera.rotation, {
         x: 0,
@@ -123,6 +135,7 @@ export default class World {
     if (this.ball) this.ball.update();
     if (this.dewy) this.dewy.update();
     if (this.multi) this.multi.update();
+    if (this.log) this.log.update();
   }
 
   intersect() {
@@ -132,7 +145,7 @@ export default class World {
         this.logo.instance,
         this.snake.instance,
         this.ball.instance,
-        this.code.instance,
+        this.log.instance,
         this.dewy.instance,
         this.multi.instance,
       ];
@@ -173,18 +186,17 @@ export default class World {
           if (currentPos == this.ball) {
             this.moveArrow(currentTarget + step, -1);
           }
-          if (currentPos == this.code) {
+          if (currentPos == this.log) {
             this.moveArrow(currentTarget - step, 1);
           }
-        } else if (this.currentIntersect.object.parent == this.code.instance) {
-          this.code.hover();
+        } else if (this.currentIntersect.object.parent == this.log.instance) {
           if (currentPos == this.multi) {
             this.moveArrow(currentTarget + step, -1);
           } else if (currentPos == this.dewy) {
             this.moveArrow(currentTarget - step, 1);
           }
         } else if (this.currentIntersect.object == this.dewy.instance) {
-          if (currentPos == this.code) {
+          if (currentPos == this.log) {
             this.moveArrow(currentTarget + step, -1);
           }
         }
@@ -209,7 +221,7 @@ export default class World {
       document.getElementById("snakeGame").click();
     } else if (this.currentIntersect.object == this.ball.instance) {
       document.getElementById("billiards").click();
-    } else if (this.currentIntersect.object.parent == this.code.instance) {
+    } else if (this.currentIntersect.object.parent == this.log.instance) {
     } else if (this.currentIntersect.object == this.dewy.instance) {
     } else if (this.currentIntersect.object == this.dewy.instance) {
     } else if (this.currentIntersect.object == this.game.instance) {
@@ -232,7 +244,7 @@ export default class World {
         document.getElementById("billiards").click();
       } else if (this.currentIntersect.object.parent == this.multi.instance) {
         this.displayIframe(multiculture);
-      } else if (this.currentIntersect.object.parent == this.code.instance) {
+      } else if (this.currentIntersect.object.parent == this.log.instance) {
         document.getElementById("code").click();
       } else if (this.currentIntersect.object == this.dewy.instance) {
       } else if (this.currentIntersect.object == this.dewy.instance) {
@@ -250,7 +262,7 @@ export default class World {
       this.logo,
       this.dewy,
       this.multi,
-      this.code,
+      this.log,
     ];
 
     let radius;

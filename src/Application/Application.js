@@ -32,7 +32,7 @@ export default class Application {
     this.resources = new Resources(sources, this.camera);
     this.raycaster = new Raycaster();
     this.renderder = new Renderer();
-    this.world = new World();
+    this.world = new World(canvas);
 
     this.sizes.on("resize", () => {
       this.resize();
