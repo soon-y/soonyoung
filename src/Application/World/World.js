@@ -12,8 +12,12 @@ import Dewy from "./Dewy";
 import Multi from "./Multi";
 
 const checkbox = document.getElementById("checkbox");
-const btnRyt = document.getElementById("arrow-right");
-const btnLeft = document.getElementById("arrow-left");
+const btnRyt = document.querySelector(".fa-arrow-right");
+const btnLeft = document.querySelector(".fa-arrow-left");
+const btnDown = document.querySelector(".fa-arrow-down");
+const footer = document.querySelector(".footer");
+const multiculture = document.getElementById("multiculture");
+const iframes = document.getElementsByTagName("iframe");
 let ready = false;
 let currentTarget = 0;
 let currentIndex = 2;
@@ -28,7 +32,7 @@ export default class World {
     this.resources = this.application.resources;
     this.raycaster = this.application.raycaster;
     //this.mouse = this.application.mouse.cursor;
-    //this.camera = this.application.camera;
+    this.camera = this.application.camera.instance;
     this.currentIntersect = null;
 
     // Wait for resources
@@ -76,11 +80,46 @@ export default class World {
     btnLeft.addEventListener("click", () => {
       this.moveArrow(currentTarget - step, 1);
     });
+    btnDown.addEventListener("click", () => {
+      gsap.to(this.camera.rotation, {
+        x: 0,
+        duration: 2,
+        ease: "power2.inout",
+      });
+
+      btnDown.style.opacity = "0";
+
+      window.setTimeout(() => {
+        btnDown.style.display = "none";
+        btnLeft.style.display = "block";
+        btnRyt.style.display = "block";
+        footer.style.display = "block";
+      }, 1000);
+
+      for (let i = 0; i < iframes.length; i++) {
+        iframes[i].style.rotate = "x 90deg";
+      }
+    });
+  }
+
+  displayIframe(iframe){
+    gsap.to(this.camera.rotation, {
+      x: Math.PI/2,
+      duration: 2,
+      ease: "power2.inout",
+    });
+    btnDown.style.opacity = "1";
+    btnDown.style.display = "block";
+    footer.style.display = "none";
+    btnLeft.style.display = "none";
+    btnRyt.style.display = "none";
+    iframe.style.rotate = "x 0deg";
   }
 
   update() {
     if (this.logo) this.logo.update();
     if (this.particle) this.particle.update();
+    if (this.snake) this.snake.update();
     if (this.ball) this.ball.update();
     if (this.dewy) this.dewy.update();
     if (this.multi) this.multi.update();
@@ -118,14 +157,12 @@ export default class World {
           this.currentIntersect.object.parent.parent.parent ==
           this.snake.instance
         ) {
-          this.snake.hover();
           if (currentPos == this.logo) {
             this.moveArrow(currentTarget + step, -1);
           } else if (currentPos == this.ball) {
             this.moveArrow(currentTarget - step, 1);
           }
         } else if (this.currentIntersect.object == this.ball.instance) {
-          this.ball.hover();
           if (currentPos == this.snake) {
             this.moveArrow(currentTarget + step, -1);
           }
@@ -133,7 +170,6 @@ export default class World {
             this.moveArrow(currentTarget - step, 1);
           }
         } else if (this.currentIntersect.object.parent == this.multi.instance) {
-          this.multi.hover();
           if (currentPos == this.ball) {
             this.moveArrow(currentTarget + step, -1);
           }
@@ -195,7 +231,7 @@ export default class World {
       } else if (this.currentIntersect.object == this.ball.instance) {
         document.getElementById("billiards").click();
       } else if (this.currentIntersect.object.parent == this.multi.instance) {
-        document.getElementById("multiculture").click();
+        this.displayIframe(multiculture);
       } else if (this.currentIntersect.object.parent == this.code.instance) {
         document.getElementById("code").click();
       } else if (this.currentIntersect.object == this.dewy.instance) {
@@ -236,8 +272,8 @@ export default class World {
       x += step;
     }
 
-    this.logo.instance.position.z = this.logo.instance.position.z - 10;
-    this.logo.logo.position.z = -radius - 10;
+    this.logo.instance.position.z = this.logo.instance.position.z - 20;
+    this.logo.logo.position.z = -radius - 20;
   }
 
   moveArrow(target, i) {
@@ -250,7 +286,7 @@ export default class World {
     currentPos = this.order[currentIndex];
     currentTarget = target;
     gsap.to(this.group.rotation, {
-      duration: 1,
+      duration: 1.5,
       y: currentTarget,
       ease: "power2.inout",
     });
