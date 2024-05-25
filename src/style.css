@@ -3,6 +3,9 @@
 
 :root {
   --fontsize: 26px;
+  --top: 20px;
+  --topP: 25px;
+  --mBoth: 4vmin;
   --white: #ffffff;
 }
 
@@ -18,21 +21,6 @@
   top: 0;
   left: 0;
   outline: none;
-}
-
-#permission {
-  position: fixed;
-  top: -20px;
-  left: 0;
-  background-color: #000000;
-  font-family: "Courier New", Courier, monospace;
-  width: 100%;
-  text-decoration: underline;
-  text-align: center;
-  font-size: 3vmin;
-  z-index: 100;
-  height: 70px;
-  display: none;
 }
 
 .center {
@@ -79,12 +67,12 @@ button {
 
 .fa-arrow-left {
   position: absolute;
-  left: 4vmin;
+  left: var(--mBoth);
 }
 
 .fa-arrow-right {
   position: absolute;
-  right: 4vmin;
+  right: var(--mBoth);
 }
 
 .fa-arrow-down {
@@ -93,14 +81,22 @@ button {
   left: 50%;
   transform: translate(-50%, 0%);
   display: none;
+  z-index: 10;
+}
+
+#permission {
+  position: fixed;
+  top: var(--topP);
+  right: var(--mBoth);
+  display: none;
 }
 
 iframe {
   position: fixed;
-  top: -90vh;
+  top: -94vh;
+  height: 94vh;
   left: 0;
   width: 100vw;
-  height: 90vh;
   -webkit-transition: 2s;
   transition: 2s;
   border: none;
@@ -117,7 +113,7 @@ iframe {
   height: 100%;
   background: #000000;
   opacity: 1;
-  transition: opacity ease-in-out 2s;
+  transition: opacity ease-in-out 1s;
   z-index: 1000;
 }
 
@@ -156,7 +152,7 @@ iframe {
 
 .switch-logo {
   position: fixed;
-  top: 20px;
+  top: var(--top);
   left: 50%;
   height: 40px;
   transform: translate(-50%, 0%);
@@ -224,7 +220,13 @@ iframe {
 }
 
 @media (max-width: 1024px) {
-  .arrow{
+
+  .arrow {
     bottom: 20px;
+  }
+
+  iframe {
+    top: -85vh;
+    height: 85vh;
   }
 }
