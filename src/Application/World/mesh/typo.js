@@ -4,13 +4,19 @@ import { Font } from 'three/examples/jsm/loaders/FontLoader.js'
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js'
 import { param } from '../../param.js'
 
-function typo(typo) {
+function typo(typo, type) {
 
     const application = new Application()
-    const resources = application.resources
+    let fontType;
+
+    if (type == "mono"){
+        fontType = application.resources.items.notoSansMono
+    }else {
+        fontType = application.resources.items.poppins
+    }
 
     // setGeometry
-    let font = new Font(resources.items.poppins)
+    let font = new Font(fontType)
     const geometry = new TextGeometry(
         typo,
         {

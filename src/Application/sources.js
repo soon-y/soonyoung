@@ -17,6 +17,11 @@ export default [
     path: ["fonts/Poppins/Poppins-Regular.ttf"],
   },
   {
+    name: "notoSansMono",
+    type: "ttf",
+    path: ["fonts/NotoSansMono/NotoSansMono-Medium.ttf"],
+  },
+  {
     name: "particleTexture",
     type: "texture",
     path: ["textures/particleMap/star_01.png"],

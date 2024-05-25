@@ -3,13 +3,13 @@ import Application from "../Application.js";
 import { typo } from "./mesh/typo.js";
 import gsap from "gsap";
 
-export default class TypoCode {
+export default class TypoLog {
   constructor() {
     this.application = new Application();
     this.scene = this.application.scene;
     this.camera = this.application.camera;
     this.time = this.application.time;
-    this.code = typo("{/code}");
+    this.code = typo("<log/>", "mono");
     this.code.mesh.geometry.translate(
       0,
       -this.code.mesh.geometry.boundingBox.max.y * 0.5,
@@ -26,13 +26,7 @@ export default class TypoCode {
     this.instance.position.z = z;
   }
 
-  hover() {
-    gsap.to(this.instance.rotation, {
-      duration: 1,
-      y: Math.PI * 3,
-      ease: "power2.inout",
-    });
-
-    this.instance.rotation.y = Math.PI;
+  update() {
+    this.instance.position.y = Math.sin(this.application.time.elapsed)*2;
   }
 }
