@@ -27,9 +27,9 @@ export default class Application {
     this.sizes = new Sizes();
     this.time = new Time();
     this.scene = new THREE.Scene();
-    this.resources = new Resources(sources);
     this.mouse = new Mouse();
     this.camera = new Camera();
+    this.resources = new Resources(sources, this.camera);
     this.raycaster = new Raycaster();
     this.renderder = new Renderer();
     this.world = new World();
