@@ -12,12 +12,12 @@ export default class Environment {
 
   setLight() {
     this.lightA = new THREE.AmbientLight(0x737373);
-    this.light = new THREE.DirectionalLight(0xffffff);
+    this.light = new THREE.DirectionalLight("#A4A4A4");
     this.light.castShadow = true;
     this.light.shadow.intensity = 0;
-    this.light.position.set(0, 20, 50);
+    this.light.position.set(0, 0, 10);
     this.helper = new THREE.DirectionalLightHelper(this.light, 5);
-    this.helper.visible = true;
+    this.helper.visible = false;
     this.scene.add(this.light, this.lightA, this.helper);
   }
 
