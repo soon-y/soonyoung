@@ -4,11 +4,12 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
 import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader";
 import EventEmitter from "./EventEmitter";
+import gsap from "gsap";
 
 const loading = document.querySelector(".overlay");
 
 export default class Resources extends EventEmitter {
-  constructor(sources) {
+  constructor(sources, cam) {
     super();
 
     //Options
@@ -19,6 +20,12 @@ export default class Resources extends EventEmitter {
       //Loaded
       () => {
         window.setTimeout(() => {
+          gsap.to(cam.instance.rotation, {
+            x: 0,
+            duration: 2,
+            ease: "power2.inout",
+          });
+
           loading.style.opacity = "0";
         }, 1000);
         window.setTimeout(() => {
