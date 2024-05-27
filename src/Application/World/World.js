@@ -18,6 +18,7 @@ const btnLeft = document.querySelector(".fa-arrow-left");
 const btnDown = document.querySelector(".fa-arrow-down");
 const footer = document.querySelector(".footer");
 const multiculture = document.getElementById("multiculture");
+const log = document.getElementById("log");
 const iframes = document.getElementsByTagName("iframe");
 let ready = false;
 let currentTarget = 0;
@@ -207,48 +208,21 @@ export default class World {
     }
   }
 
-  touch() {
-    let objects = [this.logo.instance];
-    let intersects = this.raycaster.instance.intersectObjects(objects);
-
-    if (intersects.length) {
-      this.currentIntersect = intersects[0];
-      this.click();
-    } else if (
-      this.currentIntersect.object == this.snake.instance
-    ) {
-      console.log("snake click")
-      document.getElementById("snakeGame").click();
-    } else if (this.currentIntersect.object == this.ball.instance) {
-      document.getElementById("billiards").click();
-    } else if (this.currentIntersect.object.parent == this.log.instance) {
-    } else if (this.currentIntersect.object == this.dewy.instance) {
-    } else if (this.currentIntersect.object == this.dewy.instance) {
-    } else if (this.currentIntersect.object == this.game.instance) {
-    } else if (this.currentIntersect.object == this.multi.instance) {
-    } else if (this.currentIntersect.object == this.last.instance) {
-    }
-  }
-
   click() {
     if (this.currentIntersect) {
       if (this.currentIntersect.object.parent.parent.parent == this.logo.logo) {
-        document.getElementById("about").click();
       } else if (
         this.currentIntersect.object.parent.parent == this.logo.instance
       ) {
-        document.getElementById("about").click();
       } else if (this.currentIntersect.object.parent.parent.parent == this.snake.instance) {
-        document.getElementById("snakeGame").click();
+        window.open("https://soonake-game.vercel.app/");
       } else if (this.currentIntersect.object == this.ball.instance) {
-        document.getElementById("billiards").click();
+        window.open("https://a-billiard-simulation.vercel.app");
       } else if (this.currentIntersect.object.parent == this.multi.instance) {
         this.displayIframe(multiculture);
       } else if (this.currentIntersect.object.parent == this.log.instance) {
-        document.getElementById("code").click();
+        this.displayIframe(log);
       } else if (this.currentIntersect.object == this.dewy.instance) {
-      } else if (this.currentIntersect.object == this.dewy.instance) {
-      }
     }
   }
 
