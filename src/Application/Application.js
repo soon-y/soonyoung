@@ -47,10 +47,6 @@ export default class Application {
       this.world.intersect();
     });
 
-    // this.mouse.on("scroll", () => {
-    //    this.camera.scroll();
-    // });
-
     this.mouse.on("click", () => {
       this.world.click();
     });
