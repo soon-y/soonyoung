@@ -223,6 +223,7 @@ export default class World {
       } else if (this.currentIntersect.object.parent == this.log.instance) {
         this.displayIframe(log);
       } else if (this.currentIntersect.object == this.dewy.instance) {
+      }
     }
   }
 
