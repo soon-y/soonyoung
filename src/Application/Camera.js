@@ -71,13 +71,13 @@ export default class Camera {
       let xTilt = Math.round(event.gamma) * 0.3; // y axis
 
       gsap.to(this.group.position, {
-        y: yTilt,
+        y: xTilt,
         duration: 0.6,
         ease: "power2.inout",
       });
   
       gsap.to(this.group.position, {
-        x: xTilt,
+        x: yTilt,
         duration: 0.6,
         ease: "power2.inout",
       });
