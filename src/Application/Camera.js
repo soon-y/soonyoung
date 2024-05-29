@@ -64,11 +64,6 @@ export default class Camera {
       ease: "power2.inout",
     });
 
-    gsap.to(this.group.rotation, {
-      y: xTilt*0.1,
-      duration: 0.6,
-      ease: "power2.inout",
-    });
   }
 
   setInstance() {
