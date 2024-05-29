@@ -19,6 +19,8 @@ const btnDown = document.querySelector(".fa-arrow-down");
 const footer = document.querySelector(".footer");
 const multiculture = document.getElementById("multiculture");
 const log = document.getElementById("log");
+const link = document.getElementById("link");
+const iframeBtn = document.getElementById("iframeBtn");
 const iframes = document.getElementsByTagName("iframe");
 let ready = false;
 let currentTarget = 0;
@@ -107,6 +109,7 @@ export default class World {
         btnLeft.style.display = "block";
         btnRyt.style.display = "block";
         footer.style.display = "block";
+        document.getElementById("permission").style.opacity = "1";
       }, 1000);
 
       for (let i = 0; i < iframes.length; i++) {
@@ -127,6 +130,7 @@ export default class World {
     btnLeft.style.display = "none";
     btnRyt.style.display = "none";
     iframe.style.rotate = "x 0deg";
+    document.getElementById("permission").style.opacity = "0";
   }
 
   update() {
@@ -209,22 +213,18 @@ export default class World {
   }
 
   click() {
-    if (this.currentIntersect) {
-      if (this.currentIntersect.object.parent.parent.parent == this.logo.logo) {
-      } else if (
-        this.currentIntersect.object.parent.parent == this.logo.instance
-      ) {
-      } else if (this.currentIntersect.object.parent.parent.parent == this.snake.instance) {
-        window.open("https://soonake-game.vercel.app/");
-      } else if (this.currentIntersect.object == this.ball.instance) {
-        window.open("https://a-billiard-simulation.vercel.app");
-      } else if (this.currentIntersect.object.parent == this.multi.instance) {
-        this.displayIframe(multiculture);
-      } else if (this.currentIntersect.object.parent == this.log.instance) {
-        this.displayIframe(log);
-      } else if (this.currentIntersect.object == this.dewy.instance) {
-      }
-    }
+    // if (this.currentIntersect) {
+    //   if (this.currentIntersect.object.parent.parent.parent == this.logo.logo) {
+    //   } else if (
+    //     this.currentIntersect.object.parent.parent == this.logo.instance
+    //   ) {
+    //   } else if (this.currentIntersect.object.parent == this.multi.instance) {
+    //     this.displayIframe(multiculture);
+    //   } else if (this.currentIntersect.object.parent == this.log.instance) {
+    //     this.displayIframe(log);
+    //   } else if (this.currentIntersect.object == this.dewy.instance) {
+    //   }
+    // }
   }
 
   placeObject() {
@@ -278,6 +278,25 @@ export default class World {
       ease: "power2.inout",
     });
     this.displayCheckbox(currentTarget);
+    this.updatelink(currentIndex);
+  }
+
+  updatelink(target){
+    console.log(target)
+    link.style.display="none"
+    iframeBtn.style.display="none"
+    if(target == 1){
+      link.style.display="block"
+      link.href = "https://soonake-game.vercel.app";
+    }else if(target == 0){
+      link.style.display="block"
+      link.href = "https://a-billiard-simulation.vercel.app";
+    }else if(target ==5) {
+      iframeBtn.style.display="block"
+      iframeBtn.addEventListener("click", () => {
+        this.displayIframe(log);
+      });
+    }
   }
 
   displayCheckbox(target) {

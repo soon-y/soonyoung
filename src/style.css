@@ -28,19 +28,35 @@
   text-align: center;
 }
 
+#link {
+  display: none;
+}
+
+.link {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50vw;
+  height: 50vh;
+  background-color: transparent;
+}
+
 button {
   background-color: transparent;
   border: none;
 }
 
-.fa-solid, .fa-brands {
+.fa-solid,
+.fa-brands {
   color: #ffffff85;
   font-size: var(--fontsize);
   -webkit-transition: 0.5s;
   transition: 0.5s;
 }
 
-.fa-solid:hover, .fa-brands:hover{
+.fa-solid:hover,
+.fa-brands:hover {
   color: #fff;
   cursor: pointer;
 }
@@ -60,18 +76,16 @@ button {
   transition: 0.5s;
 }
 
-.arrow{
+.arrow {
   position: fixed;
   bottom: 50%;
 }
 
 .fa-arrow-left {
-  position: absolute;
   left: var(--mBoth);
 }
 
 .fa-arrow-right {
-  position: absolute;
   right: var(--mBoth);
 }
 
@@ -214,7 +228,7 @@ iframe {
   transition: 0.3s ease all, left 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15);
 }
 
-#toggle #checkbox:checked + .knobs:before {
+#toggle #checkbox:checked+.knobs:before {
   content: "EN";
   left: 40px;
 }
