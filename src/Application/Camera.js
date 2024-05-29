@@ -52,18 +52,33 @@ export default class Camera {
     let yTilt = Math.round(event.beta - 90) * 0.3;  // x axis
     let xTilt = Math.round(event.gamma) * 0.3; // y axis
 
-    gsap.to(this.group.position, {
-      y: yTilt,
-      duration: 0.6,
-      ease: "power2.inout",
-    });
+    this.aspect = this.size.width / this.size.height;
 
-    gsap.to(this.group.position, {
-      x: xTilt,
-      duration: 0.6,
-      ease: "power2.inout",
-    });
-
+    if (this.aspect < 1) {
+      gsap.to(this.group.position, {
+        y: yTilt,
+        duration: 0.6,
+        ease: "power2.inout",
+      });
+  
+      gsap.to(this.group.position, {
+        x: xTilt,
+        duration: 0.6,
+        ease: "power2.inout",
+      });
+    } else { // wide screen
+      gsap.to(this.group.position, {
+        y: xTilt,
+        duration: 0.6,
+        ease: "power2.inout",
+      });
+  
+      gsap.to(this.group.position, {
+        x: yTilt,
+        duration: 0.6,
+        ease: "power2.inout",
+      });
+    }
 
   }
 
