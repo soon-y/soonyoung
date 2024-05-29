@@ -49,12 +49,12 @@ export default class Camera {
   }
 
   parallax(event) {
-    let yTilt = Math.round(event.beta - 90) * 0.3;  // x axis
-    let xTilt = Math.round(event.gamma) * 0.3; // y axis
-
     this.aspect = this.size.width / this.size.height;
 
     if (this.aspect < 1) {
+      let yTilt = Math.round(event.beta - 90) * 0.3;  // x axis
+      let xTilt = Math.round(event.gamma) * 0.3; // y axis
+
       gsap.to(this.group.position, {
         y: yTilt,
         duration: 0.6,
@@ -67,14 +67,17 @@ export default class Camera {
         ease: "power2.inout",
       });
     } else { // wide screen
+      let yTilt = Math.round(event.beta) * 0.3;  // x axis
+      let xTilt = Math.round(event.gamma) * 0.3; // y axis
+
       gsap.to(this.group.position, {
-        y: xTilt,
+        y: yTilt,
         duration: 0.6,
         ease: "power2.inout",
       });
   
       gsap.to(this.group.position, {
-        x: yTilt,
+        x: xTilt,
         duration: 0.6,
         ease: "power2.inout",
       });
