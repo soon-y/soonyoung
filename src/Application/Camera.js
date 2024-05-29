@@ -49,17 +49,23 @@ export default class Camera {
   }
 
   parallax(event) {
-    let yTilt = Math.round(event.beta) * 0.1;
-    let xTilt = Math.round(event.gamma) * 0.3;
+    let yTilt = Math.round(event.beta) * 0.3;  // x axis
+    let xTilt = Math.round(event.gamma) * 0.3; // y axis
 
     gsap.to(this.group.position, {
-      y: -yTilt,
+      y: yTilt,
       duration: 0.6,
       ease: "power2.inout",
     });
 
     gsap.to(this.group.position, {
       x: xTilt,
+      duration: 0.6,
+      ease: "power2.inout",
+    });
+
+    gsap.to(this.group.rotation, {
+      y: xTilt*0.1,
       duration: 0.6,
       ease: "power2.inout",
     });
