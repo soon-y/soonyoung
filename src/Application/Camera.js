@@ -91,11 +91,6 @@ export default class Camera {
     }
   }
 
-  scroll() {
-    // this.instance.position.y =
-    //   (-this.mouse.scrollY / this.size.height) * param.objectsDistance;
-  }
-
   isTouchDevice() {
     return (
       "ontouchstart" in window ||
