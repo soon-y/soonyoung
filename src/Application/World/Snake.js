@@ -134,6 +134,6 @@ export default class Snake {
 
   update() {
     this.instance.position.y = Math.sin(this.application.time.elapsed)*2;
-    this.instance.rotation.y += Math.sin(this.application.time.elapsed)*0.01;
+    this.instance.rotation.y += Math.sin(this.application.time.elapsed)*0.007;
   }
 }
