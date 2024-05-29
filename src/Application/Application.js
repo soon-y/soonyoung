@@ -7,7 +7,6 @@ import Camera from "./Camera";
 import Renderer from "./Renderer";
 import World from "./World/World.js";
 import sources from "./sources.js";
-import Raycaster from "./Raycaster";
 
 let instance = null;
 
@@ -30,7 +29,6 @@ export default class Application {
     this.mouse = new Mouse();
     this.camera = new Camera();
     this.resources = new Resources(sources, this.camera);
-    this.raycaster = new Raycaster();
     this.renderder = new Renderer();
     this.world = new World(canvas);
 
@@ -40,15 +38,6 @@ export default class Application {
 
     this.time.on("tick", () => {
       this.update();
-    });
-
-    this.mouse.on("mousemove", () => {
-      this.raycaster.update();
-      this.world.intersect();
-    });
-
-    this.mouse.on("click", () => {
-      this.world.click();
     });
   }
 
