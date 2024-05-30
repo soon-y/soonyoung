@@ -67,8 +67,8 @@ export default class Camera {
         ease: "power2.inout",
       });
     } else { // wide screen
-      let yTilt = Math.round(event.beta) * 0.3;  // x axis
-      let xTilt = Math.round(event.gamma-90) * 0.3; // y axis
+      let yTilt = Math.round(event.beta-90) * 0.3;  // x axis
+      let xTilt = Math.round(event.gamma) * 0.3; // y axis
 
       gsap.to(this.group.position, {
         y: -xTilt,
