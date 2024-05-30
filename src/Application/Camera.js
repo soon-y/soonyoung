@@ -51,38 +51,55 @@ export default class Camera {
   parallax(event) {
     this.aspect = this.size.width / this.size.height;
 
-    if (this.aspect < 1) {
-      let yTilt = Math.round(event.beta - 90) * 0.3;  // x axis
-      let xTilt = Math.round(event.gamma) * 0.3; // y axis
-
-      gsap.to(this.group.position, {
-        y: yTilt,
-        duration: 0.6,
-        ease: "power2.inout",
-      });
+    switch (screen.orientation.type) {
+      case "landscape-primary":
+        console.log("landscape-primary");
+        let yTilt = Math.round(event.beta-90) * 0.3;  // x axis
+        let xTilt = Math.round(event.gamma) * 0.3; // y axis
   
-      gsap.to(this.group.position, {
-        x: xTilt,
-        duration: 0.6,
-        ease: "power2.inout",
-      });
-    } else { // wide screen
-      let yTilt = Math.round(event.beta-90) * 0.3;  // x axis
-      let xTilt = Math.round(event.gamma) * 0.3; // y axis
-
-      gsap.to(this.group.position, {
-        y: -xTilt,
-        duration: 0.6,
-        ease: "power2.inout",
-      });
+        gsap.to(this.group.position, {
+          y: -xTilt,
+          duration: 0.6,
+          ease: "power2.inout",
+        });
+    
+        gsap.to(this.group.position, {
+          x: yTilt,
+          duration: 0.6,
+          ease: "power2.inout",
+        });
+      }
   
-      gsap.to(this.group.position, {
-        x: yTilt,
-        duration: 0.6,
-        ease: "power2.inout",
-      });
+        break;
+      case "landscape-secondary":
+        console.log("landscape-secondar");
+        break;
+      case "portrait-secondary":
+        console.log("ortrait-seconda");
+      case "portrait-primary":
+        console.log("portrait-primary");
+        let yTilt = Math.round(event.beta - 90) * 0.3;  // x axis
+        let xTilt = Math.round(event.gamma) * 0.3; // y axis
+  
+        gsap.to(this.group.position, {
+          y: yTilt,
+          duration: 0.6,
+          ease: "power2.inout",
+        });
+
+        gsap.to(this.group.position, {
+          x: xTilt,
+          duration: 0.6,
+          ease: "power2.inout",
+        });
+        break;
+      default:
+        permission.style.display = "none";
     }
 
+
+
+  
   }
 
   setInstance() {
