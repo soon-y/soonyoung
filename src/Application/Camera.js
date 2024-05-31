@@ -50,26 +50,13 @@ export default class Camera {
 
   parallax(event) {
     this.aspect = this.size.width / this.size.height;
+    let yTilt, xTilt;
 
     switch (screen.orientation.type) {
       case "landscape-primary":
         console.log("landscape-primary");
-        let yTilt = Math.round(event.beta-90) * 0.3;  // x axis
-        let xTilt = Math.round(event.gamma) * 0.3; // y axis
-  
-        gsap.to(this.group.position, {
-          y: -xTilt,
-          duration: 0.6,
-          ease: "power2.inout",
-        });
-    
-        gsap.to(this.group.position, {
-          x: yTilt,
-          duration: 0.6,
-          ease: "power2.inout",
-        });
-      }
-  
+        yTilt = Math.round(event.beta-90) * 0.3;  // x axis
+        xTilt = Math.round(event.gamma) * 0.3; // y axis
         break;
       case "landscape-secondary":
         console.log("landscape-secondar");
@@ -78,28 +65,26 @@ export default class Camera {
         console.log("ortrait-seconda");
       case "portrait-primary":
         console.log("portrait-primary");
-        let yTilt = Math.round(event.beta - 90) * 0.3;  // x axis
-        let xTilt = Math.round(event.gamma) * 0.3; // y axis
-  
-        gsap.to(this.group.position, {
-          y: yTilt,
-          duration: 0.6,
-          ease: "power2.inout",
-        });
-
-        gsap.to(this.group.position, {
-          x: xTilt,
-          duration: 0.6,
-          ease: "power2.inout",
-        });
+        yTilt = Math.round(event.beta) * 0.3;  // x axis
+        xTilt = Math.round(event.gamma) * 0.3; // y axis
         break;
       default:
         permission.style.display = "none";
     }
 
-
-
+    if(xTilt != null){
+      gsap.to(this.group.position, {
+        y: -xTilt,
+        duration: 0.6,
+        ease: "power2.inout",
+      });
   
+      gsap.to(this.group.position, {
+        x: yTilt,
+        duration: 0.6,
+        ease: "power2.inout",
+      });
+    }  
   }
 
   setInstance() {
