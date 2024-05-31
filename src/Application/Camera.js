@@ -70,13 +70,13 @@ export default class Camera {
 
     if(this.xTilt != null){
       gsap.to(this.group.position, {
-        y: - this.xTilt,
+        y: this.yTilt,
         duration: 0.6,
         ease: "power2.inout",
       });
   
       gsap.to(this.group.position, {
-        x: this.yTilt,
+        x: - this.xTilt,
         duration: 0.6,
         ease: "power2.inout",
       });
