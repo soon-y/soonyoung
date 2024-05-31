@@ -65,8 +65,8 @@ export default class Camera {
         console.log("ortrait-seconda");
       case "portrait-primary":
         console.log("portrait-primary");
-        yTilt = Math.round(event.beta) * 0.3;  // x axis
-        xTilt = Math.round(event.gamma) * 0.3; // y axis
+        xTilt = Math.round(event.beta) * 0.3;  // x axis
+        yTilt = Math.round(event.gamma) * 0.3; // y axis
         break;
       default:
         permission.style.display = "none";
