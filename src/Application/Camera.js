@@ -52,15 +52,15 @@ export default class Camera {
     this.aspect = this.size.width / this.size.height;
     switch (screen.orientation.type) {
       case "portrait-primary":
-        this.yTilt = Math.round(event.beta-90) * 0.3;  // x axis
-        this.xTilt = Math.round(event.gamma) * 0.3; // y axis
+        this.yTilt = Math.round(event.beta-90);  // x axis
+        this.xTilt = Math.round(event.gamma); // y axis
         break;
       case "portrait-secondary":
-        // this.yTilt = Math.round(event.beta-90) * 0.3;  // x axis
-        // this.xTilt = Math.round(event.gamma) * 0.3; // y axis
+        // this.yTilt = Math.round(event.beta-90);  // x axis
+        // this.xTilt = Math.round(event.gamma); // y axis
       case "landscape-primary":
-        this.xTilt = Math.round(event.beta) * 0.3;  // x axis
-        // this.yTilt = -Math.round(event.gamma) * 0.3; // y axis
+        this.xTilt = Math.round(event.beta);  // x axis
+        // this.yTilt = -Math.round(event.gamma); // y axis
         break;
       case "landscape-secondary":
         break;
@@ -68,19 +68,9 @@ export default class Camera {
         permission.style.display = "none";
     }
 
-    if(this.xTilt != null){
-      gsap.to(this.group.position, {
-        y: this.yTilt,
-        duration: 0.6,
-        ease: "power2.inout",
-      });
-  
-      gsap.to(this.group.position, {
-        x: this.xTilt,
-        duration: 0.6,
-        ease: "power2.inout",
-      });
-    }  
+    this.group.position.x = this.xTilt * 0.2;
+    this.group.position.y = this.yTilt * 0.2;
+    // this.group.rotation.y = this.xTilt * 0.001;
   }
 
   setInstance() {
@@ -105,6 +95,7 @@ export default class Camera {
       this.group.position.y += (this.parallaxY - this.group.position.y) * 0.1;
       this.rotationX = this.mouse.cursor.x * 0.1;
       this.rotationY = this.mouse.cursor.y * 0.1;
+      this.group.rotation.x = this.rotationY;
       this.group.rotation.y = this.rotationX;
     }
   }
