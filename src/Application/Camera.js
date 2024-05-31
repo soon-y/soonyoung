@@ -4,7 +4,6 @@ import { param } from "./param";
 import gsap from "gsap";
 
 const permission = document.getElementById("permission");
-const iframes = document.getElementsByTagName("iframe");
 
 export default class Camera {
   constructor() {
