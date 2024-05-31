@@ -52,26 +52,30 @@ export default class Camera {
     this.aspect = this.size.width / this.size.height;
     switch (screen.orientation.type) {
       case "portrait-primary":
-        this.yTilt = -Math.round(event.beta-90) * 0.2;  // x axis
-        this.xTilt = Math.round(event.gamma) * 0.5; // y axis
+        this.yTilt = -(event.beta-90) * 0.2;  
+        this.xTilt = event.gamma * 0.2; 
         break;
       case "portrait-secondary":
-        this.yTilt = Math.round(event.beta+90);  // x axis
-        this.xTilt = Math.round(event.gamma); // y axis
+        this.yTilt = (event.beta+90) * 0.2;  
+        this.xTilt = event.gamma * 0.2; 
       case "landscape-primary":
-        this.yTilt = Math.round(event.gamma+90); // y axis
-        this.xTilt = Math.round(event.beta);  // x axis
+        this.yTilt = event.gamma > 0 ? (event.gamma-90) * 0.2 :(event.gamma+90) * 0.2; 
+        // this.xTilt = event.beta * 0.2;  
         break;
       case "landscape-secondary":
-        this.yTilt = Math.round(event.gamma+90); // y axis 
-        this.xTilt = Math.round(event.beta+180);  // x axis
+        this.yTilt = event.gamma > 0 ? (event.gamma-90) * 0.2 :(event.gamma+90) * 0.2;  
+        // this.xTilt = -event.beta * 0.2;  
         break;
       default:
         permission.style.display = "none";
     }
 
-    this.group.position.x = this.xTilt;
-    this.group.position.y = this.yTilt;
+    gsap.to(this.group.position, {
+      x: this.xTilt,
+      y: this.yTilt,
+      duration: 0.6,
+      ease: "power2.inout",
+    });
   }
 
   setInstance() {
