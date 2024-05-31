@@ -53,6 +53,14 @@ export default class Camera {
     let yTilt, xTilt;
 
     switch (screen.orientation.type) {
+      case "portrait-primary":
+        console.log("portrait-primary");
+        xTilt = Math.round(event.beta) * 0.3;  // x axis
+        yTilt = Math.round(event.gamma) * 0.3; // y axis
+        break;
+        case "portrait-secondary":
+          console.log("ortrait-seconda");
+
       case "landscape-primary":
         console.log("landscape-primary");
         yTilt = Math.round(event.beta-90) * 0.3;  // x axis
@@ -61,13 +69,8 @@ export default class Camera {
       case "landscape-secondary":
         console.log("landscape-secondar");
         break;
-      case "portrait-secondary":
-        console.log("ortrait-seconda");
-      case "portrait-primary":
-        console.log("portrait-primary");
-        xTilt = Math.round(event.beta) * 0.3;  // x axis
-        yTilt = Math.round(event.gamma) * 0.3; // y axis
-        break;
+
+
       default:
         permission.style.display = "none";
     }
