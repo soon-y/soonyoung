@@ -59,20 +59,19 @@ export default class Camera {
         this.yTilt = Math.round(event.beta+90);  // x axis
         this.xTilt = Math.round(event.gamma); // y axis
       case "landscape-primary":
-        this.yTilt = Math.round(event.beta);  // x axis
-        this.xTilt = Math.round(event.gamma+90); // y axis
+        this.yTilt = Math.round(event.gamma+90); // y axis
+        this.xTilt = Math.round(event.beta);  // x axis
         break;
       case "landscape-secondary":
-        this.yTilt = Math.round(event.beta+180);  // x axis
-        this.xTilt = Math.round(event.gamma+90); // y axis
+        this.yTilt = Math.round(event.gamma+90); // y axis 
+        this.xTilt = Math.round(event.beta+180);  // x axis
         break;
       default:
         permission.style.display = "none";
     }
 
-    this.group.position.x = this.xTilt * 0.2;
-    this.group.position.y = this.yTilt * 0.2;
-    // this.group.rotation.y = this.xTilt * 0.001;
+    this.group.position.x = (this.xTilt - this.group.position.x) * 0.2;
+    this.group.position.y = (this.yTilt - this.group.position.y) * 0.2;
   }
 
   setInstance() {
