@@ -64,8 +64,7 @@ export default class Camera {
         this.xTilt = 0; 
         break;
       case "landscape-secondary":
-        this.yTilt = event.gamma > 0 ? (event.gamma-90) * 0.2 :(event.gamma+90) * 0.2;
-        this.xTilt = (event.beta-90) * 0.2; 
+        this.yTilt = event.beta > 0 ? (event.beta-90) * 0.2 :(event.beta+90) * 0.2;
         break;
       default:
         permission.style.display = "none";
