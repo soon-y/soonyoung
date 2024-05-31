@@ -50,7 +50,7 @@ button {
 
 .fa-solid,
 .fa-brands {
-  color: #ffffff3a;
+  color: #ffffff8b;
   font-size: var(--fontsize);
   -webkit-transition: 0.5s;
   transition: 0.5s;
@@ -256,5 +256,3 @@ iframe {
     border-color: rgb(126, 120, 237) transparent;
   }
 }
-
-@media
