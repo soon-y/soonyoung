@@ -108,8 +108,6 @@ button {
 
 iframe {
   position: fixed;
-  top: -94vh;
-  height: 94vh;
   left: 0;
   width: 100vw;
   -webkit-transition: 2s;
@@ -118,6 +116,8 @@ iframe {
   rotate: x 90deg;
   transform: translate(0%, 100%);
   z-index: 10;
+  top: -94%;
+  height: 94%;
 }
 
 /* loading */
@@ -240,11 +240,6 @@ iframe {
   .arrow {
     bottom: 20px;
   }
-
-  iframe {
-    top: -85vh;
-    height: 85vh;
-  }
 }
 
 @media (max-width: 600px) {
@@ -260,3 +255,5 @@ iframe {
     border-color: rgb(126, 120, 237) transparent;
   }
 }
+
+@media

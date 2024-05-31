@@ -4,6 +4,7 @@ import { param } from "./param";
 import gsap from "gsap";
 
 const permission = document.getElementById("permission");
+const iframes = document.getElementsByTagName("iframe");
 
 export default class Camera {
   constructor() {
@@ -17,7 +18,7 @@ export default class Camera {
 
     this.setInstance();
 
-    if (this.isTouchDevice) {
+    if (this.isTouchDevice()) {
       if (typeof DeviceMotionEvent.requestPermission === "function") {
         permission.style.display = "block";
         permission.addEventListener("click", () => {
