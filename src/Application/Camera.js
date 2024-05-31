@@ -50,40 +50,33 @@ export default class Camera {
 
   parallax(event) {
     this.aspect = this.size.width / this.size.height;
-    let yTilt, xTilt;
-
     switch (screen.orientation.type) {
       case "portrait-primary":
-        console.log("portrait-primary");
-        xTilt = Math.round(event.beta) * 0.3;  // x axis
-        yTilt = Math.round(event.gamma) * 0.3; // y axis
+        this.yTilt = Math.round(event.beta-90) * 0.3;  // x axis
+        this.xTilt = Math.round(event.gamma) * 0.3; // y axis
         break;
-        case "portrait-secondary":
-          console.log("ortrait-seconda");
-
+      case "portrait-secondary":
+        this.yTilt = Math.round(event.beta+90) * 0.3;  // x axis
+        this.xTilt = Math.round(event.gamma) * 0.3; // y axis
       case "landscape-primary":
-        console.log("landscape-primary");
-        yTilt = Math.round(event.beta-90) * 0.3;  // x axis
-        xTilt = Math.round(event.gamma) * 0.3; // y axis
+        this.yTilt = Math.round(event.beta) * 0.3;  // x axis
+
         break;
       case "landscape-secondary":
-        console.log("landscape-secondar");
         break;
-
-
       default:
         permission.style.display = "none";
     }
 
     if(xTilt != null){
       gsap.to(this.group.position, {
-        y: -xTilt,
+        y: - this.xTilt,
         duration: 0.6,
         ease: "power2.inout",
       });
   
       gsap.to(this.group.position, {
-        x: yTilt,
+        x: this.yTilt,
         duration: 0.6,
         ease: "power2.inout",
       });
