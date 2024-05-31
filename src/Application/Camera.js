@@ -59,8 +59,8 @@ export default class Camera {
         // this.yTilt = Math.round(event.beta-90) * 0.3;  // x axis
         // this.xTilt = Math.round(event.gamma) * 0.3; // y axis
       case "landscape-primary":
-        this.yTilt = Math.round(event.beta-90) * 0.3;  // x axis
-        this.xTilt = Math.round(event.gamma) * 0.3; // y axis
+        this.xTilt = Math.round(event.beta-90) * 0.3;  // x axis
+        this.yTilt = Math.round(event.gamma) * 0.3; // y axis
         break;
       case "landscape-secondary":
         break;
