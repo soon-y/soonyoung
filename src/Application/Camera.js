@@ -52,10 +52,8 @@ export default class Camera {
     this.aspect = this.size.width / this.size.height;
     switch (screen.orientation.type) {
       case "portrait-primary":
-        this.yTilt = Math.round(event.beta-90);  // x axis
-        this.xTilt = Math.round(event.gamma); // y axis
-        this.group.position.x = (this.xTilt - this.group.position.x) * 0.2;
-        this.group.position.y = (this.yTilt - this.group.position.y) * 0.2;
+        this.yTilt = -Math.round(event.beta-90) * 0.2;  // x axis
+        this.xTilt = Math.round(event.gamma) * 0.5; // y axis
         break;
       case "portrait-secondary":
         this.yTilt = Math.round(event.beta+90);  // x axis
@@ -72,8 +70,8 @@ export default class Camera {
         permission.style.display = "none";
     }
 
-    // this.group.position.x = (this.xTilt - this.group.position.x) * 0.2;
-    // this.group.position.y = (this.yTilt - this.group.position.y) * 0.2;
+    this.group.position.x = this.xTilt;
+    this.group.position.y = this.yTilt;
   }
 
   setInstance() {
