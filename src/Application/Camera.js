@@ -68,7 +68,7 @@ export default class Camera {
         permission.style.display = "none";
     }
 
-    if(xTilt != null){
+    if(this.xTilt != null){
       gsap.to(this.group.position, {
         y: - this.xTilt,
         duration: 0.6,
