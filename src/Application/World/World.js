@@ -6,10 +6,8 @@ import Logo from "./Logo";
 import Particle from "./Particle";
 import Snake from "./Snake";
 import gsap from "gsap";
-import Billiards from "./Billiards";
 import TypoLog from "./TypoLog";
 import Dewy from "./Dewy";
-import Multi from "./Multi";
 import "hammerjs";
 
 const checkbox = document.getElementById("checkbox");
@@ -26,7 +24,7 @@ let ready = false;
 let currentTarget = 0;
 let currentIndex = 2;
 let currentPos;
-const step = Math.PI / 3;
+const step = Math.PI / 2;
 
 export default class World {
   constructor(canvas) {
@@ -44,27 +42,21 @@ export default class World {
       this.logo = new Logo();
       this.particle = new Particle();
       this.snake = new Snake();
-      this.ball = new Billiards();
       this.log = new TypoLog();
       this.dewy = new Dewy();
-      this.multi = new Multi();
       this.group = new THREE.Group();
       this.group.add(
         this.logo.instance,
         this.snake.instance,
-        this.ball.instance,
         this.dewy.instance,
         this.log.instance,
-        this.multi.instance,
         this.logo.logo
       );
       this.scene.add(this.group);
       this.order = [
-        this.ball,
         this.snake,
         this.logo,
         this.dewy,
-        this.multi,
         this.log,
       ];
   
@@ -200,19 +192,21 @@ export default class World {
 
   updatelink(target){
     if(target == 0){
-      link.style.display="block"
-      iframeBtn.style.display="none"
-      link.href = "https://a-billiard-simulation.vercel.app";
-    }else if(target == 1){
-      link.style.display="block"
-      iframeBtn.style.display="none"
-      link.href = "https://soonake-game.vercel.app";
-    }else if(target ==5) {
       link.style.display="none"
       iframeBtn.style.display="block"
       iframeBtn.addEventListener("click", () => {
         this.displayIframe(log);
-      });
+      })
+    }else if(target == 1){
+      link.style.display="block"
+      iframeBtn.style.display="none"
+      link.href = "https://soonake-game.vercel.app";
+    }else if(target ==2) {
+    
+    }else { //dewy
+      link.style.display="block"
+      iframeBtn.style.display="none"
+      //link.href = "https://a-billiard-simulation.vercel.app";
     }
   }
 
