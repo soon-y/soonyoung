@@ -14,7 +14,6 @@ export default class Snake {
     this.tongue = this.resources.items.tongue;
     this.eyelid = this.resources.items.eyelid;
     this.instance = new THREE.Group();
-    this.instance.rotation.y = -Math.PI/3;
 
     this.setModel();
     this.flicking();
@@ -134,6 +133,6 @@ export default class Snake {
 
   update() {
     this.instance.position.y = Math.sin(this.application.time.elapsed)*2;
-    this.instance.rotation.y += Math.sin(this.application.time.elapsed)*0.007;
+    this.instance.rotation.y = -Math.PI/2 + Math.sin(this.application.time.elapsed)*0.5;
   }
 }
