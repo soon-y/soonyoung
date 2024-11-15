@@ -25,7 +25,8 @@ let ready = false;
 let currentTarget = 0;
 let currentIndex = 2;
 let currentPos;
-let logoUpdate = false;
+let camRotated = false;
+let isFocus = true;
 const step = Math.PI / 2;
 
 export default class World {
@@ -129,14 +130,15 @@ export default class World {
 
       btnUp.style.opacity = "0";
       camBtn.style.display = "block";
-      logoUpdate = false
+      camRotated = false
+      document.querySelector(".switch-logo").style.display = "block";
 
       window.setTimeout(() => {
-        btnDown.style.display = "none";
+        btnUp.style.display = "none";
         btnLeft.style.display = "block";
         btnRyt.style.display = "block";
         footer.style.display = "block";
-        document.getElementById("permission").style.opacity = "1";
+        document.querySelector(".switch-logo").style.opacity = "100%";
       }, 1000);
     });
 
@@ -144,7 +146,14 @@ export default class World {
       if(currentIndex == 0) this.displayIframe(log)
       if(currentIndex == 2) this.rotateLogo();
     })
+
+    window.addEventListener("blur", this.pause);
+    window.addEventListener("focus", this.play);
   }
+
+  pause() { isFocus = falseconsole.log(isFocus) }
+  
+  play() { isFocus = true }
 
   displayIframe(iframe){
     gsap.to(this.camera.rotation, {
@@ -168,15 +177,18 @@ export default class World {
       duration: 2,
       ease: "power2.inout",
     });
-    btnUp.style.opacity = "1";
+
     btnUp.style.display = "block";
     footer.style.display = "none";
     btnLeft.style.display = "none";
     btnRyt.style.display = "none";
     camBtn.style.display = "none";
     document.querySelector(".switch-logo").style.opacity = "0";
-    document.getElementById("permission").style.opacity = "0";
-    logoUpdate = true
+    window.setTimeout(() => {
+      btnUp.style.opacity = "1";
+      document.querySelector(".switch-logo").style.display = "none";
+    }, 1000);
+    camRotated = true
   }
 
   update() {
@@ -185,10 +197,10 @@ export default class World {
     if (this.snake) this.snake.update();
     if (this.dewy) this.dewy.update();
     if (this.log) this.log.update();
-    if (this.skills) this.skills.update(logoUpdate);
+    if (this.skills) this.skills.update(camRotated, isFocus);
   }
 
-    placeObject() {
+  placeObject() {
     this.aspect = this.size.width / this.size.height;
     this.val = 1 - this.aspect;
     let radius;
@@ -255,9 +267,15 @@ export default class World {
   displayCheckbox(target) {
     target = Math.abs((target / (Math.PI * 2)).toFixed(1));
     if (Number.isInteger(target)) {
-      document.querySelector(".switch-logo").style.opacity = "100%";
+      document.querySelector(".switch-logo").style.display = "block";
+      window.setTimeout(() => {
+        document.querySelector(".switch-logo").style.opacity = "100%";
+      }, 1000);
     } else {
       document.querySelector(".switch-logo").style.opacity = "0";
+      window.setTimeout(() => {
+        document.querySelector(".switch-logo").style.display = "none";
+      }, 1000);
     }
   }
 }
