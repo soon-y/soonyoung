@@ -74,8 +74,8 @@ export default class Skills {
         return false
     }
 
-    update(bool) {
-        if (bool) {
+    update(bool,isFocus) {
+        if (bool && isFocus) {
             for (let i = 0; i < this.instance.children.length; i++) {
                 this.posInCam = this.instance.children[i].position.clone()
                 this.posInCam.applyMatrix4(this.camera.instance.matrixWorldInverse)
