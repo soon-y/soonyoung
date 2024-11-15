@@ -1,6 +1,5 @@
 import Application from "./Application";
 import * as THREE from "three";
-import { param } from "./param";
 import gsap from "gsap";
 
 const permission = document.getElementById("permission");
@@ -82,7 +81,7 @@ export default class Camera {
     this.group.add(this.instance);
     this.scene.add(this.group);
 
-    this.instance.rotation.x = -Math.PI/2;
+    this.instance.rotation.x = Math.PI/2;
   }
 
   resize() {

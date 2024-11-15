@@ -100,6 +100,16 @@ button {
   mix-blend-mode: difference;
 }
 
+.fa-arrow-up {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  display: none;
+  z-index: 20;
+  mix-blend-mode: difference;
+}
+
 #permission {
   position: fixed;
   top: var(--topP);

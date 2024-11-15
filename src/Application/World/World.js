@@ -5,6 +5,7 @@ import Environment from "./Environment";
 import Logo from "./Logo";
 import Particle from "./Particle";
 import Snake from "./Snake";
+import Skills from "./Skills.js";
 import gsap from "gsap";
 import TypoLog from "./TypoLog";
 import Dewy from "./Dewy";
@@ -14,16 +15,17 @@ const checkbox = document.getElementById("checkbox");
 const btnRyt = document.querySelector(".fa-arrow-right");
 const btnLeft = document.querySelector(".fa-arrow-left");
 const btnDown = document.querySelector(".fa-arrow-down");
+const btnUp = document.querySelector(".fa-arrow-up");
 const footer = document.querySelector(".footer");
-const multiculture = document.getElementById("multiculture");
 const log = document.getElementById("log");
 const link = document.getElementById("link");
-const iframeBtn = document.getElementById("iframeBtn");
+const camBtn = document.getElementById("camBtn");
 const iframes = document.getElementsByTagName("iframe");
 let ready = false;
 let currentTarget = 0;
 let currentIndex = 2;
 let currentPos;
+let logoUpdate = false;
 const step = Math.PI / 2;
 
 export default class World {
@@ -42,6 +44,7 @@ export default class World {
       this.logo = new Logo();
       this.particle = new Particle();
       this.snake = new Snake();
+      this.skills = new Skills();
       this.log = new TypoLog();
       this.dewy = new Dewy();
       this.group = new THREE.Group();
@@ -102,7 +105,7 @@ export default class World {
       });
 
       btnDown.style.opacity = "0";
-      iframeBtn.style.display = "block";
+      camBtn.style.display = "block";
 
       window.setTimeout(() => {
         btnDown.style.display = "none";
@@ -116,6 +119,31 @@ export default class World {
         iframes[i].style.rotate = "x 90deg";
       }
     });
+
+    btnUp.addEventListener("click", () => {
+      gsap.to(this.camera.rotation, {
+        x: 0,
+        duration: 2,
+        ease: "power2.inout",
+      });
+
+      btnUp.style.opacity = "0";
+      camBtn.style.display = "block";
+      logoUpdate = false
+
+      window.setTimeout(() => {
+        btnDown.style.display = "none";
+        btnLeft.style.display = "block";
+        btnRyt.style.display = "block";
+        footer.style.display = "block";
+        document.getElementById("permission").style.opacity = "1";
+      }, 1000);
+    });
+
+    camBtn.addEventListener("click", () => {
+      if(currentIndex == 0) this.displayIframe(log)
+      if(currentIndex == 2) this.rotateLogo();
+    })
   }
 
   displayIframe(iframe){
@@ -129,19 +157,35 @@ export default class World {
     footer.style.display = "none";
     btnLeft.style.display = "none";
     btnRyt.style.display = "none";
-    iframeBtn.style.display = "none";
+    camBtn.style.display = "none";
     iframe.style.rotate = "x 0deg";
     document.getElementById("permission").style.opacity = "0";
+  }
+
+  rotateLogo(){
+    gsap.to(this.camera.rotation, {
+      x: -Math.PI/2,
+      duration: 2,
+      ease: "power2.inout",
+    });
+    btnUp.style.opacity = "1";
+    btnUp.style.display = "block";
+    footer.style.display = "none";
+    btnLeft.style.display = "none";
+    btnRyt.style.display = "none";
+    camBtn.style.display = "none";
+    document.querySelector(".switch-logo").style.opacity = "0";
+    document.getElementById("permission").style.opacity = "0";
+    logoUpdate = true
   }
 
   update() {
     if (this.logo) this.logo.update();
     if (this.particle) this.particle.update();
     if (this.snake) this.snake.update();
-    if (this.ball) this.ball.update();
     if (this.dewy) this.dewy.update();
-    if (this.multi) this.multi.update();
     if (this.log) this.log.update();
+    if (this.skills) this.skills.update(logoUpdate);
   }
 
     placeObject() {
@@ -191,21 +235,19 @@ export default class World {
   }
 
   updatelink(target){
-    if(target == 0){
+    if(target == 0){ //log
       link.style.display="none"
-      iframeBtn.style.display="block"
-      iframeBtn.addEventListener("click", () => {
-        this.displayIframe(log);
-      })
+      camBtn.style.display="block"
     }else if(target == 1){
       link.style.display="block"
-      iframeBtn.style.display="none"
+      camBtn.style.display="none"
       link.href = "https://soonake-game.vercel.app";
     }else if(target ==2) {
-    
-    }else { //dewy
+      link.style.display="none"
+      camBtn.style.display="block"
+    }else { //my room
       link.style.display="block"
-      iframeBtn.style.display="none"
+      camBtn.style.display="none"
       //link.href = "https://a-billiard-simulation.vercel.app";
     }
   }
