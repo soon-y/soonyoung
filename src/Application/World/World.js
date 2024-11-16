@@ -24,7 +24,6 @@ const iframes = document.getElementsByTagName("iframe");
 let ready = false;
 let currentTarget = 0;
 let currentIndex = 2;
-let currentPos;
 let camRotated = false;
 let isFocus = true;
 const step = Math.PI / 2;
@@ -56,15 +55,13 @@ export default class World {
         this.log.instance,
         this.logo.logo
       );
-      this.scene.add(this.group);
       this.order = [
         this.snake,
         this.logo,
         this.dewy,
         this.log,
       ];
-  
-      currentPos = this.logo;
+       this.scene.add(this.group);
       this.placeObject();
       ready = true;
     });
@@ -83,19 +80,27 @@ export default class World {
     });
 
     this.hammer.on("swipeleft", () =>{
-      this.moveArrow(currentTarget + step, -1);
+      if(!camRotated){
+        this.moveArrow(currentTarget + step, -1);
+      }
     });
 
     this.hammer.on("swiperight", () =>{
-      this.moveArrow(currentTarget - step, 1);
+      if(!camRotated){
+        this.moveArrow(currentTarget - step, 1);
+      }
     });
 
     btnRyt.addEventListener("click", () => {
-      this.moveArrow(currentTarget + step, -1);
+      if(!camRotated){
+        this.moveArrow(currentTarget + step, -1);
+      }
     });
 
     btnLeft.addEventListener("click", () => {
-      this.moveArrow(currentTarget - step, 1);
+      if(!camRotated){
+        this.moveArrow(currentTarget - step, 1);
+      }
     });
 
     btnDown.addEventListener("click", () => {
@@ -127,7 +132,9 @@ export default class World {
         duration: 2,
         ease: "power2.inout",
       });
-
+      for (let i = 0; i < iframes.length; i++) {
+        iframes[i].style.display = "block";
+      }
       btnUp.style.opacity = "0";
       camBtn.style.display = "block";
       camRotated = false
@@ -144,16 +151,24 @@ export default class World {
 
     camBtn.addEventListener("click", () => {
       if(currentIndex == 0) this.displayIframe(log)
-      if(currentIndex == 2) this.rotateLogo();
+      if(currentIndex == 2) this.displaySkills();
     })
 
     window.addEventListener("blur", this.pause);
     window.addEventListener("focus", this.play);
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) { this.pause } 
+      else { this.play }
+    });
   }
 
-  pause() { isFocus = falseconsole.log(isFocus) }
+  pause() { 
+    console.log("hidden")
+    isFocus = false }
   
-  play() { isFocus = true }
+  play() { isFocus = true
+    console.log("again")
+   }
 
   displayIframe(iframe){
     gsap.to(this.camera.rotation, {
@@ -171,13 +186,16 @@ export default class World {
     document.getElementById("permission").style.opacity = "0";
   }
 
-  rotateLogo(){
+  displaySkills(){
     gsap.to(this.camera.rotation, {
       x: -Math.PI/2,
       duration: 2,
       ease: "power2.inout",
     });
 
+    for (let i = 0; i < iframes.length; i++) {
+      iframes[i].style.display = "none";
+    }
     btnUp.style.display = "block";
     footer.style.display = "none";
     btnLeft.style.display = "none";
@@ -206,7 +224,7 @@ export default class World {
     let radius;
 
     if (this.aspect < 1) {
-      radius = param.diameter * 10 + 210 * this.val;
+      radius = param.diameter * 10 + param.objectsDistance * this.val;
     } else {
       radius = param.diameter * 10;
     }
@@ -233,7 +251,6 @@ export default class World {
       currentIndex += this.order.length;
     }
 
-    currentPos = this.order[currentIndex];
     currentTarget = target;
 
     gsap.to(this.group.rotation, {
@@ -277,5 +294,9 @@ export default class World {
         document.querySelector(".switch-logo").style.display = "none";
       }, 1000);
     }
+  }
+
+  resize() {
+    this.skills.resize()
   }
 }
