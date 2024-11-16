@@ -34,9 +34,11 @@ export default class World {
     this.size = this.application.sizes;
     this.scene = this.application.scene;
     this.resources = this.application.resources;
+    this.raycaster = this.application.raycaster;
     this.camera = this.application.camera.instance;
     this.hammer = new Hammer(canvas)
     this.hammer.get("swipe").set({ direction: Hammer.DIRECTION_HORIZONTAL});
+    this.currentIntersect = null;
 
     // Wait for resources
     this.resources.on("ready", () => {
@@ -167,7 +169,7 @@ export default class World {
     isFocus = false }
   
   play() { isFocus = true
-    console.log("again")
+    console.log("focus")
    }
 
   displayIframe(iframe){
@@ -207,6 +209,33 @@ export default class World {
       document.querySelector(".switch-logo").style.display = "none";
     }, 1000);
     camRotated = true
+  }
+
+  intersect() {
+    if (ready) {
+      const objects = [
+        this.logo.logo,
+        this.logo.instance
+      ];
+      let intersects = this.raycaster.instance.intersectObjects(objects);
+      if (intersects.length) {
+        this.currentIntersect = intersects[0];
+        document.body.style.cursor = "pointer";
+      } else {
+        this.currentIntersect = null;
+        document.body.style.cursor = "default";
+      }
+    }
+  }
+
+  click() {
+    if (this.currentIntersect) {
+      if (this.currentIntersect.object.parent.parent.parent == this.logo.logo
+        ||this.currentIntersect.object.parent.parent == this.logo.instance          
+      ) {
+        this.displaySkills()
+      } 
+    }
   }
 
   update() {
