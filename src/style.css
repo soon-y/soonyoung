@@ -5,7 +5,8 @@
   --fontsize: 26px;
   --top: 20px;
   --topP: 25px;
-  --mBoth: 4vmin;
+  --mBoth: 2vmin;
+  --mBottom: 10px;
   --white: #ffffff;
 }
 
@@ -54,6 +55,8 @@ button {
   font-size: var(--fontsize);
   -webkit-transition: 0.5s;
   transition: 0.5s;
+  padding: 1rem;
+  border-radius: 50%;
 }
 
 .fa-solid:hover,
@@ -64,7 +67,7 @@ button {
 
 .footer {
   position: fixed;
-  bottom: 20px;
+  bottom: var(--mBottom);
   width: 100%;
 }
 
@@ -249,7 +252,7 @@ iframe {
 
 @media (max-width: 1024px) {
   .arrow {
-    bottom: 20px;
+    bottom: var(--mBottom);
   }
 }
 
