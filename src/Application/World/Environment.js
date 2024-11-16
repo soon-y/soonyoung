@@ -16,11 +16,20 @@ export default class Environment {
     this.light.castShadow = true;
     this.light.shadow.intensity = 0;
     this.light.position.set(0, 0, 10);
+
     this.helper = new THREE.DirectionalLightHelper(this.light, 5);
     this.helper.visible = false;
-    this.scene.add(this.light, this.lightA, this.helper);
-  }
 
+    // light for Skill set
+    this.spotLight = new THREE.SpotLight('#A4A4A4');
+    const targetObject = new THREE.Object3D(); 
+    targetObject.position.set(0,-5,0)
+    this.spotLight.target = targetObject;
+
+    this.scene.add(this.light, this.lightA, this.helper);
+    this.scene.add(this.spotLight, targetObject, this.spotLight.target);
+  }
+ 
   setEnvironmentMap() {
     this.environmentMap = {};
     this.environmentMap.intensity = 10;
