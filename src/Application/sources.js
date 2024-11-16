@@ -22,6 +22,11 @@ export default [
     path: ["fonts/NotoSansMono/NotoSansMono-Medium.ttf"],
   },
   {
+    name: "Neutra",
+    type: "ttf",
+    path: ["fonts/Neutra/NeutraTextBold.ttf"],
+  },
+  {
     name: "particleTexture",
     type: "texture",
     path: ["textures/particleMap/star_01.png"],
@@ -52,8 +57,33 @@ export default [
     path: "textures/ballMap/Ball13.jpg",
   },
   {
-    name: "multiculture",
+    name: "vue",
     type: "gltfModel",
-    path: ["models/multiculture.glb"],
+    path: ["models/skill/vue.glb"],
+  },
+  {
+    name: "react",
+    type: "gltfModel",
+    path: ["models/skill/react.glb"],
+  },
+  {
+    name: "three",
+    type: "gltfModel",
+    path: ["models/skill/three.glb"],
+  },
+  {
+    name: "blender",
+    type: "gltfModel",
+    path: ["models/skill/blender.glb"],
+  },
+  {
+    name: "css",
+    type: "gltfModel",
+    path: ["models/skill/css.glb"],
+  },
+  {
+    name: "html",
+    type: "gltfModel",
+    path: ["models/skill/html.glb"],
   },
 ];
