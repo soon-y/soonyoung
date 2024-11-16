@@ -11,7 +11,9 @@ function typo(typo, type) {
 
     if (type == "mono"){
         fontType = application.resources.items.notoSansMono
-    }else {
+    } else if (type == "Neutra"){
+        fontType = application.resources.items.Neutra
+    } else {
         fontType = application.resources.items.poppins
     }
 
@@ -31,7 +33,10 @@ function typo(typo, type) {
     let width = geometry.boundingBox.max.x - geometry.boundingBox.min.x
 
     // setMaterial
-    const material = new THREE.MeshNormalMaterial()
+    let material = new THREE.MeshNormalMaterial()
+
+    if (typo == "JS") material = new THREE.MeshStandardMaterial({ color: 0xf7de0b })
+    if (typo == "TS") material = new THREE.MeshStandardMaterial({ color: 0x0c69cb })
 
     // setMesh
     const mesh = new THREE.Mesh(geometry, material)
