@@ -13,8 +13,6 @@ export default class Skills {
         this.centerDist = new THREE.Vector3(0, 0, 0)
         this.js = typo("JS", "Neutra")
         this.ts = typo("TS", "Neutra")
-        this.js.mesh.rotation.x = -Math.PI/2
-        this.ts.mesh.rotation.x = -Math.PI/2
         this.vue = this.resources.items.vue
         this.react = this.resources.items.react
         this.three = this.resources.items.three
@@ -25,6 +23,10 @@ export default class Skills {
         this.instance.add(this.js.mesh,this.ts.mesh,this.vue.scene,this.three.scene,this.react.scene,this.blender.scene,this.css.scene,this.html.scene)
         this.scene.add(this.instance)
 
+        this.js.mesh.rotation.x = -Math.PI/2
+        this.ts.mesh.rotation.x = -Math.PI/2
+        this.react.scene.rotation.y = Math.PI/3
+
         this.vue.scene.scale.multiplyScalar(param.outerRadius);
         this.react.scene.scale.multiplyScalar(param.outerRadius);
         this.three.scene.scale.multiplyScalar(param.outerRadius);
@@ -32,7 +34,10 @@ export default class Skills {
         this.css.scene.scale.multiplyScalar(param.outerRadius);
         this.html.scene.scale.multiplyScalar(param.outerRadius);
 
-        this.distance = param.objectsDistance * 0.8
+        this.distance = param.objectsDistance - (this.camera.instance.aspect * 50)
+
+        console.log(param.objectsDistance - (this.camera.instance.aspect * 50))
+        console.log(param.objectsDistance - (this.camera.instance.aspect * 10))
 
         // size of frustum
         this.hc = 2 * this.distance * Math.tan(Math.PI / 180 * this.camera.instance.fov / 2)
@@ -70,7 +75,6 @@ export default class Skills {
                 }
             }
             this.instance.children[i].position.set(x, -this.distance, z)
-            this.instance.children[i].rotation.set(Math.random(), Math.random(), Math.random())
         }
     }
 
@@ -136,7 +140,12 @@ export default class Skills {
     }
 
     resize() {
-        
+        this.distance = param.objectsDistance - (this.camera.instance.aspect * 50)
+        console.log(this.camera.instance.aspect)
+        this.instance.children.forEach(el => {
+            el.position.y = -this.distance
+            console.log(el.position)
+        });
     }
 
 }
