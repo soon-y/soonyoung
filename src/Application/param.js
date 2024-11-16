@@ -11,7 +11,7 @@ const param = {
   outerRadius: outerRadius,
   innerRadius: innerRadius,
   diameter: outerRadius + innerRadius,
-  objectsDistance: 200,
+  objectsDistance: 210,
 };
 
 export { param };
