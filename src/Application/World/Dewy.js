@@ -11,7 +11,7 @@ export default class Dewy {
     this.scene = this.application.scene;
 
     this.setGeometry();
-    //this.setTextures();
+    this.setTextures();
     this.setMaterial();
     this.setMesh();
     this.scene.add(this.instance);
@@ -31,8 +31,10 @@ export default class Dewy {
 
   setMaterial() {
     this.material = new THREE.MeshStandardMaterial({
-      color: "#000000",
-      //map: this.textures.color,
+      color: "#ffffff",
+      roughness: 0.3,
+      metalness: 0.1,
+      map: this.textures.color,
     });
   }
 
