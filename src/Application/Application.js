@@ -45,6 +45,7 @@ export default class Application {
     this.camera.resize();
     this.renderder.resize();
     this.world.placeObject();
+    this.world.resize();
   }
 
   update() {
