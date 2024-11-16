@@ -1,7 +1,6 @@
 import * as THREE from "three";
 import Application from "../Application.js";
 import { typo } from "./mesh/typo.js";
-import gsap from "gsap";
 
 export default class TypoLog {
   constructor() {
