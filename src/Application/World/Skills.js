@@ -105,9 +105,6 @@ export default class Skills {
         this.tsBB = new THREE.Box3()
         this.ts.mesh.geometry.computeBoundingBox()
 
-        console.log(this.html.scene)
-        console.log(this.css.scene)
-
         this.vueBB = new THREE.Box3()
         this.vue.scene.children[0].children[0].geometry.computeBoundingBox()
 
