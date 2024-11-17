@@ -63,7 +63,7 @@ export default class World {
         this.dewy,
         this.log,
       ];
-       this.scene.add(this.group);
+      this.scene.add(this.group);
       this.placeObject();
       ready = true;
     });
@@ -229,6 +229,8 @@ export default class World {
   }
 
   click() {
+    this.skills.click(camRotated)
+    
     if (this.currentIntersect) {
       if (this.currentIntersect.object.parent.parent.parent == this.logo.logo
         ||this.currentIntersect.object.parent.parent == this.logo.instance          
