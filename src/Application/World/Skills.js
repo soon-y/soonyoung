@@ -25,12 +25,20 @@ export default class Skills {
         this.instance.add(this.js.mesh,this.ts.mesh,this.vue.scene,this.three.scene,this.react.scene,this.blender.scene,this.css.scene,this.html.scene)
         this.scene.add(this.instance)
         this.objects = []
-        this.objects.push(this.js.mesh,this.ts.mesh,this.vue.scene,this.three.scene,this.react.scene,this.blender.scene,this.css.scene,this.html.scene)
+        //this.objects.push(this.js.mesh,this.ts.mesh,this.vue.scene,this.three.scene,this.react.scene,this.blender.scene,this.css.scene,this.html.scene)
+        this.intersect=[this.js.mesh,this.ts.mesh,this.vue.scene,this.three.scene,this.react.scene,this.blender.scene,this.css.scene,this.html.scene]
         this.dragControl = new DragControls( 
-            [... this.objects], 
+            this.objects, 
             this.camera.instance, 
             this.application.canvas 
         );
+
+
+        console.log(this.dragControl.objects)
+
+
+
+
         this.js.mesh.rotation.x = -Math.PI/2
         this.ts.mesh.rotation.x = -Math.PI/2
         this.react.scene.rotation.y = Math.PI/3
@@ -212,26 +220,23 @@ export default class Skills {
     }
     
     click(bool) {
-        if (bool) {
+        // if (bool) {
+        // const intersections = this.raycaster.instance.intersectObjects( this.intersect, true );
 
-        const draggableObjects = this.dragControl.objects();
-        draggableObjects.length = 0;
-
-        const intersections = this.raycaster.instance.intersectObjects( this.objects, true );
-
-		if ( intersections.length > 1 ) {               
+		// if ( intersections.length > 1 ) {               
             
-            draggableObjects.push(intersections)
-            this.dragControl.transformGroup = true;
-            } 
-        }
+        //     this.objects.push(intersections)
+        //     this.dragControl.transformGroup = true;
 
-        this.dragControl.transformGroup = false;
+        //     console.log(this.objects)
+        //     } 
+        // }
+
+        // this.dragControl.transformGroup = false;
     }
 
     resize() {
         this.distance = param.objectsDistance - (this.camera.instance.aspect * 50)
-        console.log(this.camera.instance.aspect)
         this.instance.children.forEach(el => {
             el.position.y = -this.distance
         });
