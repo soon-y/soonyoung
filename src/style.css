@@ -115,8 +115,8 @@ button {
 
 #permission {
   position: fixed;
-  top: var(--topP);
-  right: var(--mBoth);
+  top: 0;
+  right: 0;
   display: none;
 }
 
