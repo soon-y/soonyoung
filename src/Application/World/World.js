@@ -8,7 +8,7 @@ import Snake from "./Snake";
 import Skills from "./Skills.js";
 import gsap from "gsap";
 import TypoLog from "./TypoLog";
-import Dewy from "./Dewy";
+import Billiards from "./Billiards";
 import "hammerjs";
 
 const checkbox = document.getElementById("checkbox");
@@ -48,19 +48,19 @@ export default class World {
       this.snake = new Snake();
       this.skills = new Skills();
       this.log = new TypoLog();
-      this.dewy = new Dewy();
+      this.billiards = new Billiards();
       this.group = new THREE.Group();
       this.group.add(
         this.logo.instance,
         this.snake.instance,
-        this.dewy.instance,
+        this.billiards.instance,
         this.log.instance,
         this.logo.logo
       );
       this.order = [
         this.snake,
         this.logo,
-        this.dewy,
+        this.billiards,
         this.log,
       ];
       this.scene.add(this.group);
@@ -244,7 +244,7 @@ export default class World {
     if (this.logo) this.logo.update();
     if (this.particle) this.particle.update();
     if (this.snake) this.snake.update();
-    if (this.dewy) this.dewy.update();
+    if (this.billiards) this.billiards.update();
     if (this.log) this.log.update();
     if (this.skills) this.skills.update(camRotated, isFocus);
   }
@@ -305,10 +305,10 @@ export default class World {
     }else if(target ==2) {
       link.style.display="none"
       camBtn.style.display="block"
-    }else { //my room
+    }else { 
       link.style.display="block"
       camBtn.style.display="none"
-      //link.href = "https://a-billiard-simulation.vercel.app";
+      link.href = "https://a-billiard-simulation.vercel.app";
     }
   }
 

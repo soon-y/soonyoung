@@ -15,9 +15,8 @@ export default class Billiards {
     this.setMesh();
 
     this.scene.add(this.instance);
-    this.instance.rotation.y = Math.PI * 0.85;
     //this.instance.add(new THREE.AxesHelper(25));
-    this.rotation = this.application.time.delta * 0.1;
+    this.rotation = this.application.time.delta * 0.01;
   }
 
   setGeometry() {
@@ -47,7 +46,7 @@ export default class Billiards {
   update() {
     this.instance.rotation.x += this.rotation;
     this.instance.rotation.z -= this.rotation;
-    this.instance.rotation.y += this.rotation;
+    // this.instance.rotation.y += this.rotation;
     this.instance.position.y = Math.sin(this.application.time.elapsed) * 2;
   }
 }
