@@ -86,4 +86,19 @@ export default [
     type: "gltfModel",
     path: ["models/skill/html.glb"],
   },
+  {
+    name: "cssBg",
+    type: "gltfModel",
+    path: ["models/skill/cssBg.glb"],
+  },
+  {
+    name: "jsBg",
+    type: "gltfModel",
+    path: ["models/skill/jsBg.glb"],
+  },
+  {
+    name: "tsBg",
+    type: "gltfModel",
+    path: ["models/skill/tsBg.glb"],
+  },
 ];

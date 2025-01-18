@@ -1,8 +1,10 @@
 import * as THREE from 'three'
 import Application from "../Application.js"
-import { typo } from './mesh/typo.js'
 import { param } from '../param.js'
 import { DragControls } from 'three/examples/jsm/controls/DragControls.js'
+import CSS from "./CSS.js";
+import TS from "./TS.js";
+import JS from "./JS.js";
 
 export default class Skills {
     constructor() {
@@ -13,40 +15,41 @@ export default class Skills {
         this.resources = this.application.resources
         this.raycaster = this.application.raycaster
         this.centerDist = new THREE.Vector3(0, 0, 0)
-        this.js = typo("JS", "Neutra", 0xf7de0b)
-        this.ts = typo("TS", "Neutra", 0x0c69cb)
-        this.css = typo("CSS", "Dinish", 0x663399)
+        this.js = new JS()
+        this.ts = new TS()
+        this.css = new CSS()
         this.vue = this.resources.items.vue
         this.react = this.resources.items.react
         this.three = this.resources.items.three
         this.blender = this.resources.items.blender
         this.html = this.resources.items.html
         this.instance = new THREE.Group()
-        this.instance.add(this.js.mesh,this.ts.mesh,this.vue.scene,this.three.scene,this.react.scene,this.blender.scene,this.css.mesh,this.html.scene)
+        this.instance.add(
+            this.js.instance,this.ts.instance,this.css.instance,
+            this.vue.scene,this.three.scene,this.react.scene,
+            this.blender.scene,this.html.scene
+        )
         this.scene.add(this.instance)
         this.objects = []
-        //this.objects.push(this.js.mesh,this.ts.mesh,this.vue.scene,this.three.scene,this.react.scene,this.blender.scene,this.css.scene,this.html.scene)
-        this.intersect=[this.js.mesh,this.ts.mesh,this.css.mesh,this.vue.scene,this.three.scene,this.react.scene,this.blender.scene,this.css.scene,this.html.scene]
+        //this.objects.push(this.js.instance,this.ts.instance,this.vue.scene,this.three.scene,this.react.scene,this.blender.scene,this.css.instance,this.html.scene)
+        this.intersect=[this.js.instance,this.ts.instance,this.css.instance,
+            this.vue.scene,this.three.scene,this.react.scene,this.blender.scene,this.html.scene]
         this.dragControl = new DragControls( 
             this.objects, 
             this.camera.instance, 
             this.application.canvas 
         );
 
-        this.js.mesh.rotation.x = -Math.PI/2
-        this.ts.mesh.rotation.x = -Math.PI/2
-        this.css.mesh.rotation.x = -Math.PI/2
-
         this.react.scene.rotation.y = Math.PI/3
         this.three.scene.rotation.y = -Math.PI/10
 
-        this.vue.scene.scale.multiplyScalar(param.outerRadius);
-        this.react.scene.scale.multiplyScalar(param.outerRadius);
-        this.three.scene.scale.multiplyScalar(param.outerRadius);
-        this.blender.scene.scale.multiplyScalar(param.outerRadius);
-        this.html.scene.scale.multiplyScalar(param.outerRadius);
+        this.vue.scene.scale.multiplyScalar(param.outerRadius * 2);
+        this.react.scene.scale.multiplyScalar(param.outerRadius * 2);
+        this.three.scene.scale.multiplyScalar(param.outerRadius * 2);
+        this.blender.scene.scale.multiplyScalar(param.outerRadius * 2);
+        this.html.scene.scale.multiplyScalar(param.outerRadius * 2);
 
-        this.distance = param.objectsDistance - (this.camera.instance.aspect * 50)
+        this.distance = param.objectsDistance - (this.camera.instance.aspect * 0)
 
         // size of frustum
         this.hc = 2 * this.distance * Math.tan(Math.PI / 180 * this.camera.instance.fov / 2)
@@ -82,8 +85,6 @@ export default class Skills {
             }
             this.instance.children[i].position.set(x, -this.distance, z)
         }
-        this.js.mesh.geometry.translate(0, -this.js.mesh.geometry.boundingBox.max.y * 0.5, 0)
-        this.ts.mesh.geometry.translate(0, -this.ts.mesh.geometry.boundingBox.max.y * 0.5, 0)
     }
 
     overlap(x, z) {
@@ -103,13 +104,22 @@ export default class Skills {
         this.boundingBox = []
 
         this.jsBB = new THREE.Box3()
-        this.js.mesh.geometry.computeBoundingBox()
+        this.jsBB1 = new THREE.Box3()
+        this.js.instance.children[0].children[0].geometry.computeBoundingBox()
+        this.js.instance.children[1].geometry.computeBoundingBox()
+        this.jsBB.union(this.jsBB1)
 
         this.tsBB = new THREE.Box3()
-        this.ts.mesh.geometry.computeBoundingBox()
+        this.tsBB1 = new THREE.Box3()
+        this.ts.instance.children[0].children[0].geometry.computeBoundingBox()
+        this.ts.instance.children[1].geometry.computeBoundingBox()
+        this.tsBB.union(this.tsBB1)
 
         this.cssBB = new THREE.Box3()
-        this.css.mesh.geometry.computeBoundingBox()
+        this.cssBB1 = new THREE.Box3()
+        this.css.instance.children[0].children[0].geometry.computeBoundingBox()
+        this.css.instance.children[1].geometry.computeBoundingBox()
+        this.cssBB.union(this.cssBB1)
 
         this.vueBB = new THREE.Box3()
         this.vue.scene.children[0].children[0].geometry.computeBoundingBox()
@@ -129,13 +139,16 @@ export default class Skills {
         this.threeBB = new THREE.Box3()
         this.three.scene.children[0].geometry.computeBoundingBox()
         
-        this.boundingBox.push(this.jsBB, this.tsBB, this.vueBB, this.threeBB, this.reactBB,this.blenderBB, this.cssBB, this.htmlBB)
+        this.boundingBox.push(
+            this.vueBB, this.threeBB, this.reactBB, this.blenderBB, this.htmlBB,
+            this.cssBB, this.tsBB, this.jsBB
+        )
     }
 
     updateBB() {
-        this.jsBB.copy( this.js.mesh.geometry.boundingBox ).applyMatrix4( this.js.mesh.matrixWorld );
-        this.tsBB.copy( this.ts.mesh.geometry.boundingBox ).applyMatrix4( this.ts.mesh.matrixWorld );
-        this.cssBB.copy( this.css.mesh.geometry.boundingBox ).applyMatrix4( this.css.mesh.matrixWorld );
+        this.jsBB.copy( this.js.instance.children[0].children[0].geometry.boundingBox ).applyMatrix4( this.js.instance.children[0].children[0].matrixWorld );
+        this.tsBB.copy( this.ts.instance.children[0].children[0].geometry.boundingBox ).applyMatrix4( this.ts.instance.children[0].children[0].matrixWorld );
+        this.cssBB.copy( this.css.instance.children[0].children[0].geometry.boundingBox ).applyMatrix4( this.css.instance.children[0].children[0].matrixWorld );
         this.vueBB.copy( this.vue.scene.children[0].children[0].geometry.boundingBox ).applyMatrix4( this.vue.scene.children[0].children[0].matrixWorld );
         this.htmlBB1.copy( this.html.scene.children[0].children[2].geometry.boundingBox ).applyMatrix4( this.html.scene.children[0].children[2].matrixWorld );
         this.htmlBB.copy( this.html.scene.children[0].children[1].geometry.boundingBox ).applyMatrix4( this.html.scene.children[0].children[1].matrixWorld );
@@ -145,17 +158,16 @@ export default class Skills {
     }
 
     addBBhelper(){
-        const jsBBHelper = new THREE.BoxHelper( this.js.mesh, 0xffff00 );
-        const tsBBHelper = new THREE.BoxHelper( this.ts.mesh, 0xffff00 );
-        const cssBBHelper = new THREE.BoxHelper( this.css.mesh, 0xffff00 );
-        const vueBBHelper = new THREE.BoxHelper( this.vue.scene.children[0].children[0], 0xffff00 );
-        const html1Helper = new THREE.BoxHelper( this.html.scene.children[0].children[1], 0xffff00 );
-        const html2Helper = new THREE.BoxHelper( this.html.scene.children[0].children[2], 0xffff00 );
-        const reactHelper = new THREE.BoxHelper( this.react.scene.children[0], 0xffff00 );
-        const blenderHelper = new THREE.BoxHelper( this.blender.scene.children[0].children[0], 0xffff00 );
-        const threeHelper = new THREE.BoxHelper( this.three.scene.children[0], 0xffff00 );
-        this.scene.add(jsBBHelper, tsBBHelper, reactHelper, threeHelper,  blenderHelper ,        
-            vueBBHelper, html1Helper, html2Helper, cssBBHelper);
+        const jsBBHelper = new THREE.BoxHelper( this.js.instance.children[0].children[0], 0xffff00 )
+        const tsBBHelper = new THREE.BoxHelper( this.ts.instance.children[0].children[0], 0xffff00 )
+        const cssBBHelper = new THREE.BoxHelper( this.css.instance.children[0].children[0], 0xffff00 )
+        const vueBBHelper = new THREE.BoxHelper( this.vue.scene.children[0].children[0], 0xffff00 )
+        const html1Helper = new THREE.BoxHelper( this.html.scene.children[0].children[1], 0xffff00 )
+        const html2Helper = new THREE.BoxHelper( this.html.scene.children[0].children[2], 0xffff00 )
+        const reactHelper = new THREE.BoxHelper( this.react.scene.children[0], 0xffff00 )
+        const blenderHelper = new THREE.BoxHelper( this.blender.scene.children[0].children[0], 0xffff00 )
+        const threeHelper = new THREE.BoxHelper( this.three.scene.children[0], 0xffff00 )
+        this.scene.add(jsBBHelper, tsBBHelper, cssBBHelper)
     }
 
     colliding() {

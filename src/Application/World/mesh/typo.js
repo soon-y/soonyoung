@@ -15,7 +15,6 @@ function typo(typo, type, color) {
         fontType = application.resources.items.Neutra
     } else if (type == "Dinish"){
         fontType = application.resources.items.Dinish
-        console.log("css")
     } else {
         fontType = application.resources.items.poppins
     }
