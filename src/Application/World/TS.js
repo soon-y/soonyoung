@@ -13,8 +13,8 @@ export default class TS {
     this.ts = typo("TS", "Neutra", 0xFFFFFF)
     this.ts.mesh.geometry.translate(0, -this.ts.mesh.geometry.boundingBox.max.y * 0.5, 0)
     this.ts.mesh.rotation.x = -Math.PI/2
-    this.ts.mesh.position.z = 6
-    this.ts.mesh.position.x = 3
+    this.ts.mesh.position.z = 5
+    this.ts.mesh.position.x = 2.5
     this.instance = new THREE.Group()
     this.instance.add(this.tsBG.scene, this.ts.mesh)
   }

@@ -13,8 +13,8 @@ export default class JS {
     this.js = typo("JS", "Neutra", 0x231f1f)
     this.js.mesh.geometry.translate(0, -this.js.mesh.geometry.boundingBox.max.y * 0.5, 0)
     this.js.mesh.rotation.x = -Math.PI/2
-    this.js.mesh.position.z = 6
-    this.js.mesh.position.x = 3
+    this.js.mesh.position.z = 5
+    this.js.mesh.position.x = 2.5
     this.instance = new THREE.Group()
     this.instance.add(this.jsBG.scene, this.js.mesh)
   }

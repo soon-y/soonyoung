@@ -13,8 +13,8 @@ export default class CSS {
     this.css = typo("CSS", "Dinish", 0xFFFFFF)
     this.css.mesh.geometry.translate(0, -this.css.mesh.geometry.boundingBox.max.y * 0.5, 0)
     this.css.mesh.rotation.x = -Math.PI/2
-    this.css.mesh.position.z = 6
-    this.css.mesh.position.x = 1.5
+    this.css.mesh.position.z = 5
+    this.css.mesh.position.x = 0
     this.instance = new THREE.Group()
     this.instance.add(this.cssBG.scene, this.css.mesh)
   }
