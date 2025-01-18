@@ -49,7 +49,7 @@ export default class Skills {
         this.blender.scene.scale.multiplyScalar(param.outerRadius * 2);
         this.html.scene.scale.multiplyScalar(param.outerRadius * 2);
 
-        this.distance = param.objectsDistance - (this.camera.instance.aspect * 0)
+        this.distance = param.objectsDistance
 
         // size of frustum
         this.hc = 2 * this.distance * Math.tan(Math.PI / 180 * this.camera.instance.fov / 2)
