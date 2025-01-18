@@ -22,6 +22,11 @@ export default [
     path: ["fonts/NotoSansMono/NotoSansMono-Medium.ttf"],
   },
   {
+    name: "Dinish",
+    type: "ttf",
+    path: ["fonts/Dinish/DinishCondensedHeavy.ttf"],
+  },
+  {
     name: "Neutra",
     type: "ttf",
     path: ["fonts/Neutra/NeutraTextBold.ttf"],
@@ -75,11 +80,6 @@ export default [
     name: "blender",
     type: "gltfModel",
     path: ["models/skill/blender.glb"],
-  },
-  {
-    name: "css",
-    type: "gltfModel",
-    path: ["models/skill/css.glb"],
   },
   {
     name: "html",

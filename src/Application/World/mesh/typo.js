@@ -4,7 +4,7 @@ import { Font } from 'three/examples/jsm/loaders/FontLoader.js'
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js'
 import { param } from '../../param.js'
 
-function typo(typo, type) {
+function typo(typo, type, color) {
 
     const application = new Application()
     let fontType;
@@ -13,6 +13,9 @@ function typo(typo, type) {
         fontType = application.resources.items.notoSansMono
     } else if (type == "Neutra"){
         fontType = application.resources.items.Neutra
+    } else if (type == "Dinish"){
+        fontType = application.resources.items.Dinish
+        console.log("css")
     } else {
         fontType = application.resources.items.poppins
     }
@@ -35,8 +38,9 @@ function typo(typo, type) {
     // setMaterial
     let material = new THREE.MeshNormalMaterial()
 
-    if (typo == "JS") material = new THREE.MeshStandardMaterial({ color: 0xf7de0b })
-    if (typo == "TS") material = new THREE.MeshStandardMaterial({ color: 0x0c69cb })
+    if(color){
+        material = new THREE.MeshStandardMaterial({ color: color })
+    }
 
     // setMesh
     const mesh = new THREE.Mesh(geometry, material)
