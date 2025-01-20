@@ -16,4 +16,5 @@ It is my portfolio website, started from December 2022.
 ![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white) 
 * Vite.js provided by [Three.js journey](https://threejs-journey.com/)
 * Icons from [FontAwesome](https://fontawesome.com/)
+* Animation from [GSAP](https://gsap.com/)
 
