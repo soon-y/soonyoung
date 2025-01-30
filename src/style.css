@@ -51,7 +51,7 @@ button {
 
 .fa-solid,
 .fa-brands {
-  color: #ffffff6a;
+  color: #ffffffde;
   font-size: var(--fontsize);
   -webkit-transition: 0.5s;
   transition: 0.5s;
@@ -231,7 +231,7 @@ iframe {
 
 #toggle .knobs:before {
   font-family: "Poppins", sans-serif;
-  content: "KO";
+  content: "KR";
   position: absolute;
   top: 3px;
   left: 8px;
